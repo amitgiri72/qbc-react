@@ -1,0 +1,188 @@
+.artist-view-profile {
+  padding: 5% 10%;
+}
+.artist-viewp-hero {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  height: 178px;
+  border-radius: 22px;
+  opacity: 0px;
+  background: linear-gradient(93.14deg, #aa1a12 34.27%, #440a07 167.1%);
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.artist-viewp-profile {
+  display: flex;
+  gap: 20px;
+  margin-left: 80px;
+  position: relative;
+  top: 20px;
+}
+
+.artist-viewp-profile .artist-viewp-profilepic {
+  /* position: relative; */
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  /* top: 30px; */
+}
+.artist-viewp-profile .artist-viewp-profilepic img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: initial;
+  /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.artist-viewp-profile .artist-viewp-profileinfo h1 {
+  font-family: Be Vietnam Pro;
+  font-size: 37.87px;
+  font-weight: 800;
+  line-height: 47.91px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #ffffff;
+}
+.artist-viewp-profile .artist-viewp-profileinfo p {
+  font-family: Be Vietnam Pro;
+  font-size: 15.11px;
+  font-weight: 500;
+  line-height: 19.11px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  background-color: #000;
+  width: fit-content;
+  padding: 2px 10px;
+  border-radius: 22px;
+
+  color: #ffffff;
+}
+
+.artist-viewp-button {
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+  margin-right: 20px;
+  align-items: start;
+  gap: 30px;
+}
+.artist-viewp-button button {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  padding: 5px 10px;
+  color: #ffffff;
+  border-radius: 22px;
+}
+
+.artist-viewp-button button:hover {
+  background-color: #ffffff;
+  color: #aa1a12;
+}
+
+.artist-view-services{
+    padding: 40px;
+    width: 100%;
+    margin-top: 40px;
+    /* height: 430px; */
+    border: 0.4px solid #0000004A;
+    box-shadow: 0px 4px 4px 0px #00000014;
+    border-radius: 22px;
+
+}
+
+
+.artist-view-services-h2{
+    font-family: Be Vietnam Pro;
+font-size: 26.49px;
+font-weight: 400;
+line-height: 38.57px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+margin: 5px;
+
+}
+
+.artist-viewp-service-cards {
+    /* margin-top: 40px; */
+    display: flex;
+    gap: 20px;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+  }
+  
+  .artist-viewp-service-card {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 240px;
+    text-align: left;
+    /* align-items: center; */
+    background: linear-gradient(93.14deg, #aa1a12 34.27%, #440a07 167.1%);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+  }
+  
+  .artist-viewp-service-card img {
+    height: 75%;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    transition: all 0.3s ease;
+  }
+  
+  .artist-viewp-service-card h4 {
+    color: #fff;
+    margin: 0 10px;
+    text-align: left;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+  .artist-viewp-service-card p {
+    color: #000000;
+    margin:0 10px ;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+  
+  .artist-viewp-service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(170, 26, 18, 0.8); /* Reddish overlay color */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+  
+  .artist-viewp-service-card:hover::before {
+    opacity: 1;
+  }
+  
+  .artist-viewp-service-card:hover h4{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .artist-viewp-service-card:hover p{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .artist-viewp-service-card:hover img {
+    transform: scale(1.1);
+  }

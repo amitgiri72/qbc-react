@@ -1,0 +1,38 @@
+.clinet-home-dashboard{
+    padding: 5% 10%;
+}
+
+.client-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 178px;
+    background: linear-gradient(93.14deg, #AA1A12 34.27%, #440A07 167.1%);
+border-radius: 22px;
+}
+
+.client-home h1{
+    font-family: Be Vietnam Pro;
+font-size: 37.87px;
+font-weight: 800;
+line-height: 47.91px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color: #ffffff;
+
+}
+
+.client-home button{
+    border: 1px solid #ffffff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+.client-home button:hover{
+    background-color: #ffffff;
+    color: #AA1A12;
+}

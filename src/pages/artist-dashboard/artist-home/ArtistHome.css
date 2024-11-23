@@ -1,0 +1,125 @@
+.artist-dash-h {
+  padding: 5% 10%;
+}
+.artist-dash-hero {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 178px;
+  border-radius: 22px;
+  opacity: 0px;
+  background: linear-gradient(93.14deg, #aa1a12 34.27%, #440a07 167.1%);
+  justify-content: center;
+  align-items: center;
+}
+.artist-dash-hero h1 {
+  font-size: 24px;
+  font-weight: 700px;
+  font-family: Be Vietnam Pro;
+  font-size: 37.87px;
+  font-weight: 800;
+  line-height: 47.91px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #ffffff;
+}
+.artist-dash-hero .dhs {
+  border: 1px solid #ffffff;
+  border-radius: 22px;
+  width: fit-content;
+  padding: 5px 10px;
+
+  color: #ffffff;
+  background-color: transparent;
+}
+.artist-dash-hero .dhs:hover {
+  border: 1px solid #ffffff;
+
+  color: #aa1a12;
+  background-color: #ffffff;
+}
+
+.artist-dash-b {
+  /* display: flex; */
+  width: 100%;
+}
+.artist-dash-b h3 {
+  font-family: Be Vietnam Pro;
+  font-size: 30.11px;
+  font-weight: 700;
+  line-height: 30.5px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin: 20px 0 10px 10px;
+}
+.artist-dash-b-job {
+  font-family: Be Vietnam Pro;
+  font-size: 19.73px;
+  font-weight: 700;
+  line-height: 24.96px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #ffffff;
+  background-color: #aa1a12;
+  padding: 2px 5px;
+  border-radius: 80% 80%;
+}
+/* .artist-dash-b-left{
+    width: 40%;
+    border: 0.6px solid #00000029;
+    box-shadow: 0px 4px 4px 0px #0000001C;
+height: 400px;
+border-radius: 22px;
+} */
+
+.artist-dash-b-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* border: 0.4px solid #00000033; */
+
+  border-radius: 22px;
+}
+.artist-dash-card {
+  display: flex;
+  gap: 80px;
+  justify-content: start;
+  padding: 10px 80px;
+  border: 0.4px solid #00000033;
+  border-radius: 22px;
+  /* margin: 20px 0; */
+}
+.artist-dash-card h4 {
+  font-family: Poppins;
+  font-size: 20.51px;
+  font-weight: 400;
+  line-height: 23.27px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #550a06;
+}
+.artist-dash-card p {
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 15px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #000000ad;
+}
+.artist-dash-card span {
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 15px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #00000085;
+}

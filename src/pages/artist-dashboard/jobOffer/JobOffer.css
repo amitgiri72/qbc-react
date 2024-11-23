@@ -1,0 +1,159 @@
+.job-offer{
+    padding: 5% 10%;
+}
+
+.job-offer-info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 20px;
+    border-radius: 22px;
+    box-shadow: 0px 3.67px 3.67px 0px #00000040;
+
+}
+
+.job-offer-info .job-offer-head{
+    display: flex;
+    justify-content: space-between;
+}
+.job-offer-head .job-offer-head-c h2{
+    font-family: Poppins;
+font-size: 20.66px;
+font-weight: 400;
+line-height: 31px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color: #550A06;
+
+}
+
+.job-offer-head .job-offer-head-c p{
+    font-family: Poppins;
+font-size: 13.32px;
+font-weight: 600;
+line-height: 19.98px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color: #000000AD;
+
+}
+
+.job-offer-head-time p{
+    font-family: Poppins;
+    font-size: 13.32px;
+    font-weight: 600;
+    line-height: 19.98px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #00000040;
+}
+
+.job-offer-location h3{
+    font-family: Poppins;
+    font-size: 16.57px;
+    font-weight: 600;
+    line-height: 24.51px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #550A06;
+
+    
+}
+.job-offer-location span{
+    font-family: Poppins;
+font-size: 16.57px;
+font-weight: 500;
+line-height: 24.51px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color: #00000040;
+
+}
+
+
+.job-offer-info-details h3{
+    font-family: Poppins;
+    font-size: 16.57px;
+    font-weight: 600;
+    line-height: 24.51px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #550A06;
+}
+
+.job-offer-info-details h5{
+    font-family: Poppins;
+    font-size: 16.57px;
+    font-weight: 600;
+    line-height: 24.51px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+color: #000000;    
+}
+.job-offer-info-details span{
+    font-family: Poppins;
+font-size: 16.57px;
+font-weight: 500;
+line-height: 24.51px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color:  #00000040;
+;
+}
+
+.job-offer-info-details p{
+    font-family: Poppins;
+font-size: 14.7px;
+font-weight: 500;
+line-height: 21.74px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+.job-offer-additional {
+    width: 100%;
+}
+.job-offer-additional h3{
+    font-family: Poppins;
+    font-size: 16.57px;
+    font-weight: 700;
+    line-height: 24.51px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+     
+}
+
+.job-offer-additional textarea{
+    margin-top: 20px;
+    width: 100%;
+    border: 0.92px solid #000000;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.job-offer-button button{
+    width: 100%;
+    text-align: center;
+    background-color: #CF4141;
+    padding: 5px 10px;
+    border-radius: 22px;
+    color:#fff;
+    
+}
+.job-offer-button button:hover{
+
+background-color: transparent;
+color: #CF4141;
+border: 1px solid #CF4141;
+
+}

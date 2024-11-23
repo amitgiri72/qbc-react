@@ -1,0 +1,134 @@
+.artist-profile-main{
+    padding: 5% 10% ;
+}
+.artist-profile-main h6{
+    margin-left: 15px;
+}
+.artist-profile{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.artist-profile h3{
+    /* color: linear-gradient(93.14deg, #AA1A12 34.27%, #440A07 167.1%); */
+    background-image: linear-gradient(93.14deg, #AA1A12 34.27%, #440A07 167.1%);
+    color: transparent;
+    background-clip: text;
+    font-weight:700 ;
+    font-size: 50px;
+    text-align: center;
+
+}
+.artist-profile p{
+    text-align: left;
+}
+
+
+.artist-top{
+    display: flex;
+    gap: 50px;
+}
+
+.artist-image{
+    width: 520px;
+    height: 320px;
+    background-color: red;
+    border-radius: 10px;
+}
+.artist-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.artist-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.acs .content-s{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    border: 2px solid #0000001C;
+    color: #550A06;
+    
+    border-radius: 28px;
+    padding: 10px 10px;
+   
+    width: 70%;
+}
+
+.acs .content-s .pspan{
+    background: #9D160F17;
+    width: 65px;
+    height: 34px;
+  
+    padding: 2px 12px 3px 12px;
+    gap: 0px;
+    border-radius: 48px;
+    opacity: 0px;
+    text-align: center;
+    color: #550A06;
+
+    
+}
+.artist-bottom{
+    margin-top: 20px;
+}
+
+.content-sb{
+    border: 2px solid #0000001C;
+    border-radius: 28px;
+    padding: 10px;
+}
+
+.artist-bottom .abr{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.artist-bottom .abrs{
+    width: 40%;
+}
+.artist-bottom .content-s .pspan{
+    background: #9D160F17;
+    width: 65px;
+    height: 34px;
+  
+    padding: 2px 12px 3px 12px;
+    gap: 0px;
+    border-radius: 48px;
+    opacity: 0px;
+    text-align: center;
+    color: #550A06;
+
+    
+}
+
+
+.artist-bottom .content-s{
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 10px 20px; */
+    border: 2px solid #0000001C;
+    color: #550A06;
+    
+    border-radius: 28px;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+   
+    /* width: 40%; */
+}
+
+.artist-bottom .pspani{
+    width: 44px;
+    height: 44px;
+    position: relative;
+    right: -20px;
+    cursor: pointer;
+}

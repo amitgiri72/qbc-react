@@ -1,0 +1,39 @@
+.confirmed-jobs{
+    padding: 5% 10%;
+}
+
+
+.create-new-job{
+    display: flex;
+    justify-content: right;
+   
+    /* width: fit-content; */
+
+}
+.create-new-job button{
+    background-color: transparent;
+    border: 1px solid #AA1A12;
+    color: #AA1A12;
+   
+    padding: 5px 10px;
+    border-radius:10px 10px 0 0  ;
+}
+
+.create-new-job button:hover{
+    background:#AA1A12;
+    border: 1px solid #AA1A12;
+    color: #ffffff;
+}
+
+.client-pannel-tabs{
+    display: flex;
+    width: 100%;
+    gap: 40px;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #AA1A12;
+    border-radius: 22px 0 22px 22px;
+    height: 52px;
+    margin-bottom: 20px;
+    /* padding: 20px 0; */
+}

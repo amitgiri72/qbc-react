@@ -3,9 +3,19 @@
 }
 .contact{
     display: flex;
+    justify-content: space-between;
 }
 .contact-left{
     width: 50%;
+}
+.contact-right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 35%;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
 }
 .contact-left h1{
     font-family: Impact;
@@ -43,14 +53,14 @@ text-decoration-skip-ink: none;
     border: 1px solid #AA1A12;
     border-radius: 22px;
     color: #440A07;
-    background-color: #fc08080c;
+    background-color: transparent;
 }
 .contact-form-item textarea{
     padding: 5px 15px;
     border: 1.5px solid #AA1A12;
     border-radius: 22px;
     color: #440A07;
-    background-color: #fc08080c;
+    background-color: transparent;
 }
 .contact-form button{
     background-color: #AA1A12;
@@ -61,4 +71,19 @@ text-decoration-skip-ink: none;
     background-color: transparent;
    border: 1px solid #AA1A12;
    color: #AA1A12;
+}
+.contact-right-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+}
+.contact-address{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    color:#000000a1;
+   
 }

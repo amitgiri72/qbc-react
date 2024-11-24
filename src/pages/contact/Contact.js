@@ -1,5 +1,8 @@
 import React from 'react'
 import "./Contact.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 const Contact = () => {
   return (
     <div className='contact-main'>
@@ -25,7 +28,25 @@ const Contact = () => {
             <button>Send Message</button>
         </div>
     </div>
-    <div className="contact-right"></div>
+    <div className="contact-right">
+        <div className="contact-right-img">
+            <img src="images/contact.svg" alt='contact-img'/>
+        </div>
+        <div className="contact-right-info">
+            <div className="contact-address">
+            <FontAwesomeIcon icon={faLocationDot} />
+            <p>Canada</p>
+            </div>
+            <div className="contact-address">
+            <FontAwesomeIcon icon={faEnvelope} />
+            <p>quickballchange@gmail.com  </p>
+            </div>
+            <div className="contact-address">
+            <FontAwesomeIcon icon={faPhone} />
+            <p>+1 647 822 9893</p>
+            </div>
+        </div>
+    </div>
     </div>
     </div>
   )

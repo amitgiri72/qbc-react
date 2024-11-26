@@ -13,7 +13,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Artist Roster', path: '/artist-roster' },
+    { name: 'Artists', path: '/artist' },
     { name: 'Services', path: '/services' },
     { name: 'Contact Us', path: '/contact' }
   ];
@@ -103,13 +103,13 @@ const Navbar = () => {
             <div className="pt-4 pb-3 border-t border-gray-100">
               <Link
                 to="/login"
-                className="block w-full px-3 py-2 text-sm font-medium border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md mb-2"
+                className="block w-full px-3 py-2 text-sm font-medium border-1 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md mb-2"
               >
                 Log in
               </Link>
               <Link
                 to="/signup"
-                className="block w-full px-3 py-2 text-sm font-medium border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 rounded-md"
+                className="block w-full px-3 py-2 text-sm font-medium border-1 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 rounded-md"
               >
                 Sign Up
               </Link>

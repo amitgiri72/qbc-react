@@ -35,6 +35,14 @@ const Services = () => {
           <img src='images/se1.png' alt='img' />
           <h4>Card Title</h4>
         </div>
+        <div className="card">
+          <img src='images/se1.png' alt='img' />
+          <h4>Card Title</h4>
+        </div>
+        <div className="card">
+          <img src='images/se1.png' alt='img' />
+          <h4>Card Title</h4>
+        </div>
       </div>
     </div>
   )

@@ -67,7 +67,7 @@ const ArtistForum = () => {
                   onChange={() => handleReviewSelection("Critique")}
                 />
                 <label htmlFor="critique" className="">
-                  Critique
+                 Dance Educator
                 </label>
               </div>
               <div className=" artistInput">
@@ -85,7 +85,7 @@ const ArtistForum = () => {
                   htmlFor="competition-commentary"
                   className=""
                 >
-                  Competition/Commentary
+                 Adjudicator
                 </label>
               </div>
               <div className=" artistInput">
@@ -98,7 +98,7 @@ const ArtistForum = () => {
                   onChange={() => handleReviewSelection("Event Choreography")}
                 />
                 <label htmlFor="event-choreography" className="">
-                  Event Choreography
+           Emcee
                 </label>
               </div>
               <div className=" artistInput">
@@ -111,7 +111,7 @@ const ArtistForum = () => {
                   onChange={() => handleReviewSelection("Master Classes")}
                 />
                 <label htmlFor="master-classes" className="">
-                  Master Classes
+              Brand Ambassador
                 </label>
               </div>
               <div className=" artistInput">
@@ -124,10 +124,10 @@ const ArtistForum = () => {
                   onChange={() => handleReviewSelection("Private Classes")}
                 />
                 <label htmlFor="private-classes" className="">
-                  Private Classes
+        Choreographer 
                 </label>
               </div>
-              <div className=" artistInput">
+              {/* <div className=" artistInput">
                 <input
                   type="checkbox"
                   id="voice-coach"
@@ -139,14 +139,13 @@ const ArtistForum = () => {
                 <label htmlFor="voice-coach" className="">
                   Voice Coach
                 </label>
-              </div>
+              </div> */}
             </div>
           </div>
 
           <div>
             <label className="mb-2 artist-label-head">
-              2. Services you would like to offer also add your base rate for
-              each{" "}
+              2. Styles you would like to teach{" "}
               <span className="artist-form-head-span">
                 (Select one or more)
               </span>
@@ -179,7 +178,7 @@ const ArtistForum = () => {
                   onChange={() => handleServiceSelection("Critique")}
                 />
                 <label htmlFor="critique" className="">
-                  Critique
+                  Ballet
                 </label>
               </div>
               <div className=" artistInput">
@@ -197,7 +196,7 @@ const ArtistForum = () => {
                   htmlFor="competition-commentary"
                   className=""
                 >
-                  Competition/Commentary
+                 Ballroom
                 </label>
               </div>
               <div className=" artistInput">
@@ -210,7 +209,7 @@ const ArtistForum = () => {
                   onChange={() => handleServiceSelection("Event Choreography")}
                 />
                 <label htmlFor="event-choreography" className="">
-                  Event Choreography
+                Irish
                 </label>
               </div>
               <div className=" artistInput">
@@ -223,7 +222,7 @@ const ArtistForum = () => {
                   onChange={() => handleServiceSelection("Master Classes")}
                 />
                 <label htmlFor="master-classes" className="">
-                  Master Classes
+                Jazz
                 </label>
               </div>
               <div className=" artistInput">
@@ -236,7 +235,7 @@ const ArtistForum = () => {
                   onChange={() => handleServiceSelection("Private Classes")}
                 />
                 <label htmlFor="private-classes" className="">
-                  Private Classes
+                  Swing
                 </label>
               </div>
               <div className=" artistInput">
@@ -249,13 +248,13 @@ const ArtistForum = () => {
                   onChange={() => handleServiceSelection("Voice Coach")}
                 />
                 <label htmlFor="voice-coach" className="">
-                  Voice Coach
+                  Other
                 </label>
               </div>
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <label
               htmlFor="discipline"
               className="mb-2 artist-label-head"
@@ -271,28 +270,34 @@ const ArtistForum = () => {
               className="w-full artist-form-select"
             >
               <option value="">Select--</option>
-              <option value="painting">Painting</option>
-              <option value="photography">Photography</option>
-              <option value="dance">Dance</option>
-              <option value="videographer">Videographer</option>
-              <option value="acting-coach">Acting Coach</option>
-              <option value="voice-coach">Voice Coach</option>
+              
+              <option value="acting-coach">Ballet</option>
+              <option value="photography">Ballroom</option>
+              <option value="voice-coach">Irish</option>
+              <option value="painting">Jazz</option>
+              
+              <option value="videographer">Swing</option>
+              <option value="dance">Tap</option>
+              
+              <option value="voice-coach">Other</option>
             </select>
-          </div>
+          </div> */}
 
           <div>
             <label
               htmlFor="website"
               className="mb-2 artist-label-head"
             >
-              4. Drop your portfolio or resume link here
+              3. Tell us about yourself <span className="artist-form-head-span">
+                (in paragraph){" "}
+              </span>
             </label>
-            <input
-              type="text"
+            <textarea
+             
               id="website"
               name="website"
               className="w-full artist-form-select"
-              placeholder="Enter link here"
+              placeholder="Hii, I am..."
             />
           </div>
           <div>
@@ -300,7 +305,75 @@ const ArtistForum = () => {
               htmlFor="website"
               className="mb-2 artist-label-head"
             >
-              5. How many years of experience you have
+              4. Upload your headshot <span className="artist-form-head-span">
+                (in image){" "}
+              </span>
+            </label>
+            <input
+             type="file"
+              id="website"
+              name="website"
+              className="w-full artist-form-select"
+              placeholder="Hii, I am..."
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="website"
+              className="mb-2 artist-label-head"
+            >
+              5. Upload your resume <span className="artist-form-head-span">
+                (in pdf){" "}
+              </span>
+            </label>
+            <input
+             type="file"
+              id="website"
+              name="website"
+              className="w-full artist-form-select"
+              placeholder="Hii, I am..."
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="website"
+              className="mb-2 artist-label-head"
+            >
+              6. Upload two refrence letters <span className="artist-form-head-span">
+                (both letter in one file (in pdf)){" "}
+              </span>
+            </label>
+            <input
+             type="file"
+              id="website"
+              name="website"
+              className="w-full artist-form-select"
+              placeholder="Hii, I am..."
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="website"
+              className="mb-2 artist-label-head"
+            >
+              7. Upload your Vulnerable Sector Screening (VSS) <span className="artist-form-head-span">
+                (in pdf){" "}
+              </span>
+            </label>
+            <input
+             type="file"
+              id="website"
+              name="website"
+              className="w-full artist-form-select"
+              placeholder="Hii, I am..."
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="website"
+              className="mb-2 artist-label-head"
+            >
+              8. How many years of experience you have
             </label>
 
             <div className="artist-experience-cards">

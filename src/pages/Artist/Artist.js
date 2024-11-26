@@ -40,6 +40,24 @@ const Artist = () => {
             <p>subtitle</p>
             <span>tag</span>
         </div>
+        <div className="a-card">
+            <img src='images/se3.png'alt='img' />
+            <h4>card title</h4>
+            <p>subtitle</p>
+            <span>tag</span>
+        </div>
+        <div className="a-card">
+            <img src='images/se3.png'alt='img' />
+            <h4>card title</h4>
+            <p>subtitle</p>
+            <span>tag</span>
+        </div>
+        <div className="a-card">
+            <img src='images/se3.png'alt='img' />
+            <h4>card title</h4>
+            <p>subtitle</p>
+            <span>tag</span>
+        </div>
       </div>
     </div>
   )

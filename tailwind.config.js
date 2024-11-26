@@ -9,6 +9,7 @@ module.exports = {
         red: {
           600: '#AA1A12', // Replace with your exact red color
         },
+       
       },
       fontFamily: {
         'vietnam': ['"Be Vietnam Pro"', 'sans-serif'],

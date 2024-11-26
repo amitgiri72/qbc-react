@@ -1,0 +1,66 @@
+.artist-hero-c{
+    background: linear-gradient(180deg, #AA1A12 0%, #550A06 100%);
+
+}
+
+.artist-hero-h1{
+    font-family: "Dancing Script", cursive;
+font-size: 128px;
+font-weight: 400;
+line-height: 128px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+color: #fff;
+}
+
+.artist-hero-p{
+    font-family: Poppins;
+font-size: 39.69px;
+font-weight: 500;
+line-height: 74.54px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+
+.artist-hero-home-button{
+    color: #AA1A12;
+    background-color: #000;
+    padding: 15px 40px;
+    border-radius: 32px;
+
+    font-family: Be Vietnam Pro;
+font-size: 20.28px;
+font-weight: 400;
+/* line-height: 31.98px; */
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+}
+
+.artist-hero-home-button:hover{
+background-color: #AA1A12;
+color: #000;
+}
+
+.artist-hero-home-button2{
+border: 1px solid #fff;
+color: #fff;
+padding: 15px 40px;
+border-radius: 32px;
+
+font-family: Be Vietnam Pro;
+font-size: 20.28px;
+font-weight: 400;
+/* line-height: 31.98px; */
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+.artist-hero-home-button2:hover{
+background-color: #fff;
+color: #AA1A12;
+}

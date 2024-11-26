@@ -1,5 +1,7 @@
 import React from "react";
 import "./ArtistProfile.css";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ArtistProfile = () => {
   return (
@@ -82,37 +84,46 @@ const ArtistProfile = () => {
           </div>
         </div>
       </div>
-
       <div className="artist-profile">
-        <h3>Explore Simillar Artist</h3>
+        <h3>Explore Simillar Artists</h3>
       </div>
-      <div className="a-cards">
-        <div className="a-card">
-            <img src='images/se3.png'alt='img' />
+      {/* <div className="profile-artist-main"> */}
+        {/* <h3>Explore Simillar Artists</h3> */}
+        <div className="profile-artist-cards">
+        <div className="left-button">
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </div>
+          <div className="profile-artist-card">
+            <img src="images/se3.png" alt="img" />
             <h4>card title</h4>
             <p>subtitle</p>
             <span>tag</span>
-        </div>
-        <div className="a-card">
-            <img src='images/se3.png'alt='img' />
+          </div>
+          <div className="profile-artist-card">
+            <img src="images/se3.png" alt="img" />
             <h4>card title</h4>
             <p>subtitle</p>
             <span>tag</span>
-        </div>
-        <div className="a-card">
-            <img src='images/se3.png'alt='img' />
+          </div>
+          <div className="profile-artist-card">
+            <img src="images/se3.png" alt="img" />
             <h4>card title</h4>
             <p>subtitle</p>
             <span>tag</span>
-        </div>
-        <div className="a-card">
-            <img src='images/se3.png'alt='img' />
+          </div>
+          <div className="profile-artist-card">
+            <img src="images/se3.png" alt="img" />
             <h4>card title</h4>
             <p>subtitle</p>
             <span>tag</span>
+          </div>
+
+          <div className="right-button">
+            <FontAwesomeIcon icon={faArrowRight} />
+          </div>
         </div>
-       
-      </div>
+        
+      {/* </div> */}
     </div>
   );
 };

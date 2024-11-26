@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import Services from './pages/Services/Services';
 import About from './pages/About/About';
 import Artist from './pages/Artist/Artist';
@@ -33,7 +33,7 @@ function App() {
     const navbar2Routes = [
       '/dashboard-jobs',
       '/job-offer',
-      '/artist-home',
+      '/artist-dashboard',
       '/view-profile',
       '/client-home',
       '/client-jobs',
@@ -56,7 +56,7 @@ function App() {
     <Route path="/contact" element={<Contact/>}/>
     <Route path="/artist-profile" element={<ArtistProfile/>}/>
     <Route path="/artist-form" element={<ArtistForum/>}/>
-    <Route path="/artist-home" element={<ArtistHome/>}/>
+    <Route path="/artist-dashboard" element={<ArtistHome/>}/>
     <Route path="/view-profile" element={<ViewProfile/>}/>
     <Route path="/dashboard-jobs" element={<ArtistDJobs/>}/>
     <Route path="/job-offer" element={<JobOffer/>}/>

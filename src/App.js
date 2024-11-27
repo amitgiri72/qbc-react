@@ -19,6 +19,8 @@ import Navbar2 from './componnents/Navbar/Navbar2/Navbar2';
 import Navbar from './componnents/Navbar/Navbar1/Navbar';
 import Footer from './componnents/Footer/Footer';
 import Contact from './pages/contact/Contact';
+import Login from './pages/Login/Login';
+import Register from './pages/Login/Register';
 
 
 
@@ -47,9 +49,12 @@ function App() {
   
   return (
     <>
-      {showNavbar2 ? <Navbar2 /> : <Navbar />}
+    
+      {/* {showNavbar2 ? <Navbar2 /> : <Navbar />} */}
    <Routes>
     <Route path="/" element={<Home/>}/>
+    <Route path="/login" element={<Login/>}/>
+    <Route path="/register" element={<Register/>}/>
     <Route path="/services" element={<Services/>}/>
     <Route path="/about" element={<About/>}/>
     <Route path="/artist" element={<Artist/>}/>

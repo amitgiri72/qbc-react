@@ -1,11 +1,9 @@
 .login-main {
   width: 100%;
   height: 100vh;
-
   display: flex;
   justify-content: start;
   align-items: center;
-
   /* background-color: brown; */
   background-image: url("../../../public/images/login.png");
   /* background-attachment:fixed; */
@@ -94,34 +92,28 @@
 }
 
 @media only screen and (max-width: 764px) {
-    .login-main{
-        justify-content: center;
-    }
-    .login-main .login {
+  .login-main {
+    justify-content: center;
+  }
+  .login-main .login {
     margin: auto 20px;
     /* margin-left: auto; */
   }
 }
 
 @media only screen and (max-width: 400px) {
-    
-    .login-content{
-        gap: 10px;
-    }
-.login-content h2 {
-    
+  .login-content {
+    gap: 10px;
+  }
+  .login-content h2 {
     font-size: 24.85px;
     font-weight: 600;
     line-height: 1.3;
-   
   }
-  
+
   .login-content p {
-   
     font-size: 14.43px;
     font-weight: 400;
     line-height: 1.2;
-    
   }
-  
 }

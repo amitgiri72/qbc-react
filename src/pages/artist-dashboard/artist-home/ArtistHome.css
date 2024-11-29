@@ -123,3 +123,35 @@ border-radius: 22px;
   text-decoration-skip-ink: none;
   color: #00000085;
 }
+
+
+@media (max-width: 768px) {
+
+  .artist-dash-card{
+    display: flex;
+    gap: 20px;
+  }
+
+
+}
+
+@media (max-width: 464px) {
+
+  .artist-dash-card {
+    display: flex;
+    gap: 40px;
+    justify-content: start;
+    padding: 10px 20px;
+    border: 0.4px solid #00000033;
+    border-radius: 22px;
+    /* margin: 20px 0; */
+  }
+  .artist-dash-card h4{
+    font-size: 15px;
+    line-height: 1.3;
+
+  }
+  
+}
+
+

@@ -87,3 +87,29 @@ text-decoration-skip-ink: none;
     color:#000000a1;
    
 }
+
+@media screen and (max-width: 768px) {
+    .contact-main{
+        padding: 10% 10%;
+    }
+
+.contact{
+    flex-direction:column-reverse;
+    width: 100%;
+    gap: 40px;
+}
+.contact-left{
+    width: 100%;
+}
+.contact-right{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+}

@@ -36,8 +36,8 @@ const Footer = () => {
         </ul>
       </div>
       <div>
-        <h5 className="text-lg font-semibold">Subscribe</h5>
-        <form action="#">
+        <h5 className="text-lg font-semibold">Contact Us</h5>
+        {/* <form action="#">
           <div className="flex items-stretch">
             <input 
               type="email" 
@@ -47,7 +47,7 @@ const Footer = () => {
             />
             <button className="btn bg-red-600 text-white px-4 py-2 rounded-r-md" type="submit">→</button>
           </div>
-        </form>
+        </form> */}
         <address className="mt-4">
           <strong>Address:</strong> xyz, Canada<br />
           <strong>Phone No:</strong> +1234567898<br />

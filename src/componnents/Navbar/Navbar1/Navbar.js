@@ -12,10 +12,10 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
+    { name: 'About', path: '/about' },
     { name: 'Artists', path: '/artist' },
     { name: 'Services', path: '/services' },
-    { name: 'Contact Us', path: '/contact' }
+    { name: 'Contact', path: '/contact' }
   ];
 
   const isActive = (path) => {
@@ -59,13 +59,13 @@ const Navbar = () => {
               to="/login"
               className="text-sm font-medium px-6 py-2 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-[30px]"
             >
-              Log in
+              Login
             </Link>
             <Link
               to="/signup"
               className="text-sm font-medium px-6 py-2 border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 rounded-[30px]"
             >
-              Sign Up
+              SignUp
             </Link>
           </div>
 
@@ -105,13 +105,13 @@ const Navbar = () => {
                 to="/login"
                 className="block w-full px-3 py-2 text-sm font-medium border-1 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md mb-2"
               >
-                Log in
+                Login
               </Link>
               <Link
                 to="/signup"
                 className="block w-full px-3 py-2 text-sm font-medium border-1 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 rounded-md"
               >
-                Sign Up
+                SignUp
               </Link>
             </div>
           </div>

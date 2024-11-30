@@ -1,4 +1,5 @@
 .artistdjobs{
+  margin-top: 40px;
     padding: 5% 10%;
 }
 
@@ -79,12 +80,59 @@
 
 
   @media (max-width: 768px) {
-
-    .artist-dash-card{
-      display: flex;
-      gap: 20px;
+    .artistdjobs{
+      margin-top: 80px;
     }
+    .artist-dash-h {
+     margin-top: 8%;
+    }
+  
+    .artistdjobs .artist-dash-card {
+      display: flex;
+      gap: 30px;
+    }
+    .artistdjobs .artist-dash-hero h1{
+  text-align: center;
+  font-size: 16px;
+    }
+
+    .artistdjobs .artist-dash-card span {
+      line-height: 1.2;
+    }
+
+    .artistdjobs .artist-dash-card h4{
+
+      font-size: 18px;
+      line-height: 1.2;
+        }
+      
+       
+      
   
   
   }
+  
+  @media (max-width: 464px) {
+    .artistdjobs .artist-dash-h {
+      /* margin-top: 15%; */
+     }
+     .artistdjobs .artist-dash-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: start;
+      padding: 10px 20px;
+      border: 0.4px solid #00000033;
+      border-radius: 22px;
+      /* margin: 20px 0; */
+    }
+    .artistdjobs .artist-dash-card h4{
+      font-size: 15px;
+      line-height: 1.3;
+  
+    }
+    
+  }
+  
+  
   

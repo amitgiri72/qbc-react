@@ -1,4 +1,5 @@
 .job-offer{
+    margin-top: 40px;
     padding: 5% 10%;
 }
 
@@ -156,4 +157,9 @@ background-color: transparent;
 color: #CF4141;
 border: 1px solid #CF4141;
 
+}
+@media (max-width: 768px) {
+.job-offer{
+    margin-top: 70px;
+}
 }

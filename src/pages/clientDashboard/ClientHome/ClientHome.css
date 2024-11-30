@@ -1,4 +1,5 @@
 .clinet-home-dashboard{
+    margin-top: 40px;
     padding: 5% 10%;
 }
 
@@ -35,4 +36,16 @@ color: #ffffff;
 .client-home button:hover{
     background-color: #ffffff;
     color: #AA1A12;
+}
+
+
+@media (max-width: 764px) {
+
+    .clinet-home-dashboard{
+        margin-top: 70px;
+        
+    }
+    .client-home h1 {
+        text-align: center;
+    }
 }

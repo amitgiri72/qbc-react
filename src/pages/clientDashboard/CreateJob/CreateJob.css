@@ -1,4 +1,5 @@
 .client-create-job{
+    margin-top: 40px;
     padding: 5% 10%;
 }
 
@@ -35,8 +36,8 @@ text-decoration-skip-ink: none;
 }
 .create-job-form-row{
     display: flex;
-    flex-direction: row;
-    gap: 20px;
+    flex-direction: column;
+    gap: 5px;
     width: 100%;
 }
 .create-job-form-rows{
@@ -55,7 +56,7 @@ text-decoration-skip-ink: none;
 }
 .create-job-form-item-p{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 .create-job-form-item input{
@@ -74,4 +75,37 @@ text-decoration-skip-ink: none;
     background-color: transparent;
     border: 1px solid #CF4141;
     color: #CF4141;
+}
+
+@media (max-width: 764px) {
+    .client-create-job{
+        margin-top: 70px;
+    }
+    .create-job-form-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .create-job-form-item-p{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+}
+
+@media (max-width: 464px) {
+    .create-job-form-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .create-job-form-item-p{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+
+.create-job-form-rows{
+    flex-direction: column;
+}
+    
 }

@@ -1,5 +1,6 @@
 .confirmed-jobs{
     padding: 5% 10%;
+    margin-top: 40px;
 }
 
 
@@ -36,4 +37,29 @@
     height: 52px;
     margin-bottom: 20px;
     /* padding: 20px 0; */
+}
+
+.artist-pannel-tab{
+    /* background-color: #ffffff; */
+    border-radius: 22px;
+    width: 45%;
+    text-align: center;
+    padding: 5px 10px;
+}
+
+@media (max-width: 764px) {
+    .confirmed-jobs{
+        
+        margin-top: 70px;
+    }
+    
+    
+}
+@media (max-width: 464px) {
+    .artist-pannel-tab {
+        padding: 0 10px;
+        font-size: 14px;
+    }
+    
+    
 }

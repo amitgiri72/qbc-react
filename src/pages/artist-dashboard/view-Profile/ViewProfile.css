@@ -1,4 +1,5 @@
 .artist-view-profile {
+  margin-top: 40px;
   padding: 5% 10%;
 }
 .artist-viewp-hero {
@@ -112,7 +113,7 @@ margin: 5px;
     /* margin-top: 40px; */
     display: flex;
     gap: 20px;
-    /* justify-content: space-between; */
+    justify-content: space-around;
     flex-wrap: wrap;
   }
   
@@ -186,3 +187,50 @@ margin: 5px;
   .artist-viewp-service-card:hover img {
     transform: scale(1.1);
   }
+
+
+
+  @media (max-width: 768px) {
+    .artist-view-profile {
+      margin-top: 70px;
+     
+    }
+    .artist-viewp-hero{
+      flex-direction: column;
+      justify-content: start;
+      gap: 20px;
+      height: auto;
+      padding: 20px;
+    }
+    .artist-viewp-profile{
+      margin-left: 0;
+      margin: auto;
+      justify-content: start;
+    }
+    .artist-viewp-profile .artist-viewp-profileinfo h1{
+      font-size: 20px;
+    }
+.artist-viewp-button{
+  justify-content: center;
+  margin-right: 0;
+}
+
+
+    }
+
+    @media (max-width: 464px) {
+
+      .artist-viewp-profile{
+flex-direction: column;
+gap: 0;
+      }
+
+      .artist-viewp-button{
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .artist-viewp-button button{
+        padding: 5px 40px;
+      }
+
+    }

@@ -350,6 +350,9 @@ text-decoration-skip-ink: none;
   .home-service-cards .right-button {
     padding: 8px 16px;
   }
+  .artist-testimonial-cards {
+    gap: 20px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -371,6 +374,13 @@ text-decoration-skip-ink: none;
   }
 }
 
+
+@media screen and (max-width: 648px) {
+
+  .artist-testimonial-text {
+    width: auto;
+  }
+}
 @media screen and (max-width: 480px) {
   .home-services-main h3 {
     font-size: 30px;
@@ -391,7 +401,54 @@ text-decoration-skip-ink: none;
     gap: 8px;
     padding: 0 10px;
   }
+
+  .artist-testimonial{
+    flex-direction: column;
+    /* bottom: 70px; */
+  }
+  .artist-testimonial-text {
+    width: auto;
+    font-size: 14px !important;
+  }
+  .artist-testimonial-p {
+    font-size: 14px;
+  }
+  .artist-testimonial-img{
+    display: none;
+  }
+  .artist-testimonial-cards {
+    gap: 5px;
+    /* height: auto; */
+    
+  }
+  .atrist-testimonial-border{
+    width: auto;
+  }
+  .artist-testimonial-head h3 {
+    font-size: 40px;
+  }
+
+
 }
 
+
+@media screen and (max-width: 340px) {
+  .artist-testimonial-head h3 {
+    font-size: 32px !important;
+    margin-left: 0;
+  }
+
+  .artist-testimonial-cards .left-button {
+
+    display: none;
+  }
+  .artist-testimonial-cards .right-button {
+
+    display: none;
+  }
+  .artist-tesimonial-card {
+    margin: 0 20px;
+  }
+}
 
 

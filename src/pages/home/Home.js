@@ -19,8 +19,8 @@ const Home = () => {
 
 
 
-   // Get number of cards to display based on screen size
-   const getServicesPerPage = () => {
+  // Get number of cards to display based on screen size
+  const getServicesPerPage = () => {
     if (windowWidth >= 1024) return 4;    // Large screens
     if (windowWidth >= 768) return 3;     // Tablet
     return 2;                             // Mobile
@@ -38,10 +38,10 @@ const Home = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  
 
-   // Fetch services data
-   useEffect(() => {
+
+  // Fetch services data
+  useEffect(() => {
     const fetchServices = async () => {
       try {
         const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service');
@@ -93,9 +93,9 @@ const Home = () => {
       <div className="home-services-main">
         <h3>Our Services</h3>
 
-       
+
         <div className="home-service-cards">
-          <div 
+          <div
             className={`left-button ${!canGoBack ? 'disabled' : ''}`}
             onClick={canGoBack ? handlePrevServices : undefined}
             style={{ opacity: canGoBack ? 1 : 0.5, cursor: canGoBack ? 'pointer' : 'default' }}
@@ -120,7 +120,7 @@ const Home = () => {
             )}
           </div>
 
-          <div 
+          <div
             className={`right-button ${!canGoForward ? 'disabled' : ''}`}
             onClick={canGoForward ? handleNextServices : undefined}
             style={{ opacity: canGoForward ? 1 : 0.5, cursor: canGoForward ? 'pointer' : 'default' }}
@@ -131,43 +131,43 @@ const Home = () => {
       </div>
 
 
-        <div className="why">
-          <div className="left font-vietnam">
-            <span>Why</span><span>Choose</span> <span>US ?</span>
-          </div>
-          <div className="right">
-            <div className="right-l">
-              <div className="td"></div>
-              <div className="right-l1">
-
-
-                <h5>For Artists :</h5>
-                <li><img src='images/star.png' /><span>Flexible Hours</span></li>
-                <li><img src='images/star.png' /><span>Financial Stability</span></li>
-                <li><img src='images/star.png' /><span>Do what you love</span></li>
-              </div>
-              <div className="right-l2"></div>
-            </div>
-            <div className="right-l">
-              <div className="td"></div>
-              <div className="right-l1">
-                <h5>For Studios :</h5>
-
-                <li><img src='images/star.png' /><span>Versatile Roster</span></li>
-                <li><img src='images/star.png' /><span>Professional</span></li>
-                <li><img src='images/star.png' /><span>Reference & Background Check</span></li>
-              </div>
-              <div className="right-l2"></div>
-
-            </div>
-            <div className="right-r"></div>
-
-          </div>
+      <div className="why">
+        <div className="left font-vietnam">
+          <span>Why</span><span>Choose</span> <span>US ?</span>
         </div>
+        <div className="right">
+          <div className="right-l">
+            <div className="td"></div>
+            <div className="right-l1">
 
-        <div className="home-artist-main">
-          <h3>Our Artists</h3>
-          <div className="home-artist-cards">
+
+              <h5>For Artists :</h5>
+              <li><img src='images/star.png' /><span>Flexible Hours</span></li>
+              <li><img src='images/star.png' /><span>Financial Stability</span></li>
+              <li><img src='images/star.png' /><span>Do what you love</span></li>
+            </div>
+            <div className="right-l2"></div>
+          </div>
+          <div className="right-l">
+            <div className="td"></div>
+            <div className="right-l1">
+              <h5>For Studios :</h5>
+
+              <li><img src='images/star.png' /><span>Versatile Roster</span></li>
+              <li><img src='images/star.png' /><span>Professional</span></li>
+              <li><img src='images/star.png' /><span>Reference & Background Check</span></li>
+            </div>
+            <div className="right-l2"></div>
+
+          </div>
+          <div className="right-r"></div>
+
+        </div>
+      </div>
+
+      <div className="home-artist-main">
+        <h3>Our Artists</h3>
+        {/* <div className="home-artist-cards">
             <div className="left-button">
               <FontAwesomeIcon icon={faArrowLeft} />
             </div>
@@ -199,55 +199,55 @@ const Home = () => {
             <div className="right-button">
               <FontAwesomeIcon icon={faArrowRight} />
             </div>
-          </div>
+          </div> */}
 
+      </div>
+
+      <div className="artist-home-testimonial">
+        <div className="artist-testimonial-head">
+          <h3 >Testimonials</h3>
+          <div className="atrist-testimonial-border"></div>
         </div>
 
-        <div className="artist-home-testimonial">
-          <div className="artist-testimonial-head">
-            <h3 >Testimonials</h3>
-            <div className="atrist-testimonial-border"></div>
+
+        <div className="artist-testimonial-cards">
+          <div className="left-button">
+            <FontAwesomeIcon icon={faArrowLeft} />
           </div>
-
-
-          <div className="artist-testimonial-cards">
-            <div className="left-button">
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </div>
-            <div className="artist-tesimonial-card">
-              <div className="artist-testimonial">
-                <div className="artist-testimonial-img">
-                  <img src="images/se3.png" alt="img" />
+          <div className="artist-tesimonial-card">
+            <div className="artist-testimonial">
+              <div className="artist-testimonial-img">
+                <img src="images/se3.png" alt="img" />
+              </div>
+              <div className="artist-testimonial-text">
+                <div className="artist-testimonial-text-card">
+                  <p>Kristin Watson</p>
+                  <p>Marketing</p>
+                  <p>Cordinate</p>
                 </div>
-                <div className="artist-testimonial-text">
-                  <div className="artist-testimonial-text-card">
-                    <p>Kristin Watson</p>
-                    <p>Marketing</p>
-                    <p>Cordinate</p>
-                  </div>
-                  <div className="artist-testimonial-text-card">
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStar} />
-                    <p>Testimonial</p>
-                  </div>
+                <div className="artist-testimonial-text-card">
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStar} />
+                  <p>Testimonial</p>
                 </div>
               </div>
-
-              <p className="artist-testimonial-p">
-                Building relationships and having fun through community events.
-              </p>
             </div>
 
-            <div className="left-button">
-              <FontAwesomeIcon icon={faArrowRight} />
-            </div>
+            <p className="artist-testimonial-p">
+              Building relationships and having fun through community events.
+            </p>
+          </div>
+
+          <div className="left-button">
+            <FontAwesomeIcon icon={faArrowRight} />
           </div>
         </div>
       </div>
-      );
+    </div>
+  );
 };
 
-      export default Home;
+export default Home;

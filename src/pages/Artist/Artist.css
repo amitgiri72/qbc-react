@@ -1,4 +1,5 @@
 .artist-main{
+    margin-top: 30px;
     padding: 5% 10% ;
 }
 .artist{
@@ -36,6 +37,7 @@ text-decoration-skip-ink: none;
     width: 240px;
     /* height: 423px; */
     border-radius: 10px;
+    /* justify-content: center; */
     /* background-color: #AA1A12; */
     /* color: #fff; */
     box-shadow: 0px 2.87px 2.87px 0px #00000040;
@@ -67,3 +69,34 @@ text-decoration-skip-ink: none;
     border-radius: 24px;
     margin-left:15px ;
 }
+
+@media screen and (max-width: 764px) {
+    .artist-main{
+        margin-top: 70px;
+    }
+    .a-cards{
+        justify-content: center;
+    }
+    .a-card{
+        width: 180px;
+
+    }
+    .a-card img{
+        width: 180px;
+        height: 180px;
+    }
+  }
+@media screen and (max-width: 516px) {
+    .a-cards{
+        justify-content: center;
+        gap: 10px;
+    }
+    .a-card{
+        width: 140px;
+
+    }
+    .a-card img{
+        width: 140px;
+        height: 140px;
+    }
+  }

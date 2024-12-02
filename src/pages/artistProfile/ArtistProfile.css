@@ -216,4 +216,44 @@ margin: 20px 0;
     background: #000000;
    
   }
-  
+  @media screen and (max-width: 1024px) {
+    .acs .content-s{
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+
+    .artist-top{
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    .artist-image{
+      width: 100%;
+    }
+.artist-top .artist-content{
+  width: 100%;
+}
+.artist-top .artist-content.acs{
+  width: 100%;
+}
+.acs .content-s{
+  width: 100%;
+}
+
+.abr .abrs{
+  width: 100%;
+
+}
+
+
+
+  }
+
+  @media screen and (max-width: 464px) {
+.abr{
+  flex-direction: column;
+  gap: 5px;
+}
+  }

@@ -104,6 +104,7 @@ import Contact from './pages/contact/Contact';
 import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import PrivateRoute from './PrivateRoute';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
     const location = useLocation();
@@ -128,7 +129,7 @@ function App() {
         <>
             {/* Navbar rendering */}
             {showNavbar2 ? <Navbar2 /> : <Navbar />}
-
+            <ToastContainer/>
             <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />

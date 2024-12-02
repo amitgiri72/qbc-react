@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./Login.css";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -25,6 +26,7 @@ const Login = () => {
             );
             const from = location.state?.from?.pathname || '/';
             navigate(from, { replace: true });
+            toast.success("Login");
             setSuccess(response.data.message || 'Login successful!');
             setError('');
         } catch (err) {
@@ -35,6 +37,7 @@ const Login = () => {
 
     return (
         <div className="login-main">
+            <ToastContainer/>
             <div className="login">
                 <div className="login-logo">
                     <img src="images/logo.png" alt="logo" />

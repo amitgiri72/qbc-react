@@ -128,7 +128,7 @@ function App() {
     return (
         <>
             {/* Navbar rendering */}
-            {showNavbar2 ? <Navbar2 /> : <Navbar />}
+            {/* {showNavbar2 ? <Navbar2 /> : <Navbar />} */}
             <ToastContainer/>
             <Routes>
                 {/* Public Routes */}
@@ -147,7 +147,7 @@ function App() {
                     <Route path="/artist-dashboard" element={<ArtistHome />} />
                     <Route path="/view-profile" element={<ViewProfile />} />
                     <Route path="/dashboard-jobs" element={<ArtistDJobs />} />
-                    <Route path="/job-offer" element={<JobOffer />} />
+                    <Route path="/job-offer/:id" element={<JobOffer />} />
                     <Route path="/client-home" element={<ClientHome />} />
                     <Route path="/client-jobs" element={<ConfirmedJobs />} />
                     <Route path="/create-job" element={<CreateJob />} />

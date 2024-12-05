@@ -1,72 +1,9 @@
-// import React from 'react'
-// import "./ArtistHome.css"
-
-// const ArtistHome = () => {
-//     return (
-//         <div className='artist-dash-h'>
-//             <div className="artist-dash-hero">
-//                 <h1>Hello Indiana Mehta</h1>
-//                 <div className="dhs">
-//                     <span>View Profile</span>
-//                 </div>
-//             </div>
-
-//             <div className="artist-dash-b">
-//                 <h3>Job for you <span className='artist-dash-b-job'>3</span></h3>
-//                 {/* <div className="artist-dash-b-left"></div> */}
-//                 <div className="artist-dash-b-right">
-//                     <div className="artist-dash-card">
-//                         <div className="artist-dash-card-1"><h4>Creater Space</h4>
-//                             <p>Subsitute Teacher</p>
-//                             <span>Florida US, 2 days ago</span>
-//                         </div>
-//                         <div className="artist-dash-card-2"><h4>1st march 2024</h4>
-//                             <p>10 am -  5pm</p>
-//                             <span>Friday</span></div>
-//                         <div className="artist-dash-card-3">
-//                             <h4>45$/hr</h4>
-//                         </div>
-//                     </div>
-//                     <div className="artist-dash-card">
-//                         <div className="artist-dash-card-1"><h4>Creater Space</h4>
-//                             <p>Subsitute Teacher</p>
-//                             <span>Florida US, 2 days ago</span>
-//                         </div>
-//                         <div className="artist-dash-card-2"><h4>1st march 2024</h4>
-//                             <p>10 am -  5pm</p>
-//                             <span>Friday</span></div>
-//                         <div className="artist-dash-card-3">
-//                             <h4>45$/hr</h4>
-//                         </div>
-//                     </div>
-//                     <div className="artist-dash-card">
-//                         <div className="artist-dash-card-1"><h4>Creater Space</h4>
-//                             <p>Subsitute Teacher</p>
-//                             <span>Florida US, 2 days ago</span>
-//                         </div>
-//                         <div className="artist-dash-card-2"><h4>1st march 2024</h4>
-//                             <p>10 am -  5pm</p>
-//                             <span>Friday</span></div>
-//                         <div className="artist-dash-card-3">
-//                             <h4>45$/hr</h4>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-
-//         </div>
-//     )
-// }
-
-// export default ArtistHome
-
-
-
 
 
 import React, { useState, useEffect } from 'react';
 import "./ArtistHome.css";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const getRelativeTime = (date) => {
@@ -92,8 +29,10 @@ const getRelativeTime = (date) => {
 
 const ArtistHome = () => {
     const [jobs, setJobs] = useState([]);
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-
+    const [jobId,setJobId] = useState("");
+   
     // Fetch jobs data on component mount
     useEffect(() => {
         const fetchJobs = async () => {
@@ -109,12 +48,28 @@ const ArtistHome = () => {
         fetchJobs();
     }, []);
 
+    function formatTime(time24) {
+        const [hour, minute] = time24.split(':').map(Number); // Split and convert to numbers
+        const ampm = hour >= 12 ? 'PM' : 'AM'; // Determine AM or PM
+        const hour12 = hour % 12 || 12; // Convert to 12-hour format, ensuring 12:00 is handled correctly
+        return `${hour12}:${minute.toString().padStart(2, '0')} ${ampm}`;
+    }
+    
+
+    const viewProfile = async()=>{
+        navigate("/view-profile")
+    }
+
+    const navigatePage = async (id)=>{
+        navigate(`/job-offer/${id}`)
+    }
+
     return (
         <div className='artist-dash-h'>
             <div className="artist-dash-hero">
                 <h1>Hello Indiana Mehta</h1>
                 <div className="dhs">
-                    <span>View Profile</span>
+                    <span onClick={viewProfile}>View Profile</span>
                 </div>
             </div>
 
@@ -125,7 +80,7 @@ const ArtistHome = () => {
                         <p>Loading jobs...</p>
                     ) : jobs.length > 0 ? (
                         jobs.map((job, index) => (
-                            <div key={index} className="artist-dash-card">
+                            <div key={index} className="artist-dash-card" onClick={()=>navigatePage(job._id)}>
                                 <div className="artist-dash-card-1">
                                     <h4>{job.studioName}</h4>
                                     <p>{job.style}</p>
@@ -133,7 +88,7 @@ const ArtistHome = () => {
                                 </div>
                                 <div className="artist-dash-card-2">
                                     <h4>{job.startDate && new Date(job.startDate).toDateString()}</h4>
-                                    <p>{job.from} - {job.to}</p>
+                                    <p>{formatTime(job.from)} - {formatTime(job.to)}</p>
                                     <span>{new Date(job.startDate).toLocaleString('en-US', { weekday: 'long' })}</span>
                                 </div>
                                 <div className="artist-dash-card-3">

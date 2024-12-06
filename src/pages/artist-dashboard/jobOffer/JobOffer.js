@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./JobOffer.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import Cookies from 'js-cookie';
+import { toast } from "react-toastify";
 
 const getRelativeTime = (date) => {
   const currentDate = new Date();
@@ -35,8 +36,11 @@ function formatTime(time24) {
 
 const JobOffer = () => {
   const jobId = useParams().id;
+  const userId = Cookies.get('userId'); 
+  console.log("user",userId)
 
   const [jobOffer, setJobOffer] = useState([]);
+  const [notes, setNotes] = useState("");
 
   const handleGetJob = async () => {
     try {
@@ -51,11 +55,26 @@ const JobOffer = () => {
       console.log(error);
     }
   };
+  const handleConfirmJob = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/v1/job/users/${jobId}`,{userId,notes}
+      );
+      if (response) {
+        toast.success("Job applied successfully")
+      }
+      else{
+        toast.error("error, apply again")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     handleGetJob();
 
-    
+
   }, []);
 
 
@@ -90,16 +109,17 @@ const JobOffer = () => {
           </h5>
 
           <p>
-           {jobOffer.description}
+            {jobOffer.description}
           </p>
         </div>
 
         <div className="job-offer-additional">
           <h3>Additional Information</h3>
-          <textarea placeholder="Enter some additional info you would like to add" />
+          <textarea placeholder="Enter some additional info you would like to add" value={notes}
+            onChange={(e) => setNotes(e.target.value)} />
         </div>
         <div className="job-offer-button">
-          <button>Confirm</button>
+          <button onClick={ ()=>handleConfirmJob()}>Confirm</button>
         </div>
       </div>
       {/* </div> */}

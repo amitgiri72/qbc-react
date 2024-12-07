@@ -64,6 +64,11 @@ text-decoration-skip-ink: none;
 
 }
 
+.booking-artists-container{
+    display: flex;
+    gap: 20px;
+}
+
 @media (max-width: 764px) {
 
     .booking-artist-info{

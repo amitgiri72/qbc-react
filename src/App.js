@@ -151,7 +151,7 @@ function App() {
                     <Route path="/client-home" element={<ClientHome />} />
                     <Route path="/client-jobs" element={<ConfirmedJobs />} />
                     <Route path="/create-job" element={<CreateJob />} />
-                    <Route path="/confirm-booking" element={<ConfirmedBooking />} />
+                    <Route path="/confirm-booking/:id" element={<ConfirmedBooking />} />
                     <Route path="/booking-request" element={<BookingRequest />} />
                 </Route>
 

@@ -97,7 +97,7 @@ console.log()
             </div>
           </div>
           <div className="booking-price">
-            <h4>45$ /hr</h4>
+            <h4>{jobOffer.rate}$ /hr</h4>
           </div>
           <div className="job-offer-location">
             <h3>

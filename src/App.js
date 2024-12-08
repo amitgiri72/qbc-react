@@ -152,7 +152,7 @@ function App() {
                     <Route path="/client-jobs" element={<ConfirmedJobs />} />
                     <Route path="/create-job" element={<CreateJob />} />
                     <Route path="/confirm-booking/:id" element={<ConfirmedBooking />} />
-                    <Route path="/booking-request" element={<BookingRequest />} />
+                    <Route path="/booking-request/:id" element={<BookingRequest />} />
                 </Route>
 
                 {/* Fallback Route */}

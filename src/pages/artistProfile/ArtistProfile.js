@@ -10,12 +10,12 @@ const ArtistProfile = () => {
   const userId = Cookies.get("userId");
   const [user, setUser] = useState(null);
   const [categories, setCategories] = useState([]);
-  const [style, setStyle] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showResumeModal, setShowResumeModal] = useState(false);
-  const [showHeadshotModal, setShowHeadshotModal] = useState(false);
+  const [style, setStyle] = useState([]);
+  const [activeModal, setActiveModal] = useState(null); // To track active modal
   const navigate = useNavigate();
 
+  // Fetch user details
   const fetchUserDetails = async (userId) => {
     try {
       const response = await axios.get(
@@ -52,21 +52,16 @@ const ArtistProfile = () => {
     }
   };
 
+  useEffect(() => {
+    fetchUserDetails(userId);
+  }, []);
+
   const arrayBufferToBase64 = (buffer) => {
     const binary = String.fromCharCode(...new Uint8Array(buffer));
     return window.btoa(binary);
   };
 
-  const handleResumeClick = () => setShowResumeModal(true);
-  const handleHeadshotClick = () => setShowHeadshotModal(true);
-  const closeModal = () => {
-    setShowResumeModal(false);
-    setShowHeadshotModal(false);
-  };
-
-  useEffect(() => {
-    fetchUserDetails(userId);
-  }, []);
+  const closeModal = () => setActiveModal(null);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -126,10 +121,10 @@ const ArtistProfile = () => {
               <div className="content-s">
                 {user.resume ? (
                   <>
-                    <div className="pspa" onClick={handleResumeClick}>
-                      View Resume
-                    </div>
-                    <a
+                  <div className="pspan" onClick={() => setActiveModal("resume")}>
+                    View Resume
+                  </div>
+                  <a
                       href={`data:${user.resume.contentType};base64,${arrayBufferToBase64(
                         user.resume.data.data
                       )}`}
@@ -139,7 +134,7 @@ const ArtistProfile = () => {
                         <img src="images/download.png" alt="Download Icon" />
                       </div>
                     </a>
-                  </>
+                </>
                 ) : (
                   <div className="pspan">No resume available</div>
                 )}
@@ -150,19 +145,19 @@ const ArtistProfile = () => {
               <div className="content-s">
                 {user.headshot ? (
                   <>
-                    <div className="pspa" onClick={handleHeadshotClick}>
-                      View Headshot
-                    </div>
-                    <a
-                      href={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
-                        user.headshot.data.data
-                      )}`}
-                      download="headshot.jpg"
-                    >
-                      <div className="pspani">
-                        <img src="images/download.png" alt="Download Icon" />
-                      </div>
-                    </a>
+                  <div className="pspan" onClick={() => setActiveModal("headshot")}>
+                    View Headshot
+                  </div>
+                  <a
+                  href={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
+                    user.headshot.data.data
+                  )}`}
+                  download="headshot.jpg"
+                >
+                  <div className="pspani">
+                    <img src="images/download.png" alt="Download Icon" />
+                  </div>
+                </a>
                   </>
                 ) : (
                   <div className="pspan">No headshot available</div>
@@ -173,33 +168,31 @@ const ArtistProfile = () => {
         </div>
       </div>
 
-      {/* Resume Modal */}
-      {showResumeModal && (
+      {/* Modal Overlay */}
+      {activeModal && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content">
-            <iframe
-              src={`data:${user.resume.contentType};base64,${arrayBufferToBase64(
-                user.resume.data.data
-              )}`}
-              title="Resume"
-              width="100%"
-              style={{height:"80px"}}
-            ></iframe>
-          </div>
-        </div>
-      )}
-
-      {/* Headshot Modal */}
-      {showHeadshotModal && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content">
-            <img
-              src={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
-                user.headshot.data.data
-              )}`}
-              alt="Headshot"
-              style={{height:"80px"}}
-            />
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>
+              &times;
+            </button>
+            {activeModal === "resume" && (
+              <iframe
+                src={`data:${user.resume.contentType};base64,${arrayBufferToBase64(
+                  user.resume.data.data
+                )}`}
+                title="Resume"
+                className="modal-frame"
+              />
+            )}
+            {activeModal === "headshot" && (
+              <img
+                src={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
+                  user.headshot.data.data
+                )}`}
+                alt="Headshot"
+                className="modal-image"
+              />
+            )}
           </div>
         </div>
       )}

@@ -19,7 +19,7 @@ const ArtistForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [category, setCategory] = useState([]);
-
+const [user,setUser] = useState([]);
 
 
   // Fetch category data
@@ -40,7 +40,27 @@ const ArtistForm = () => {
   }, []);
 
 
-  
+// Fetch user details
+
+useEffect(() => {
+const fetchUserDetails = async () => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/api/v1/auth/user/${userId}`
+    );
+    if (response) {
+      setUser(response.data.user);
+      console.log(response.data.user);
+     
+     
+    }
+  } catch (error) {
+    console.error(`Error fetching user details for ${userId}:`, error);
+    setLoading(false);
+  }
+};
+fetchUserDetails();
+}, []);
 
   const handleReviewSelection = (categoryId, categoryName) => {
     if (selectedReviews.find(review => review.id === categoryId)) {
@@ -71,7 +91,7 @@ const ArtistForm = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    
+
     try {
       const formData = new FormData();
 
@@ -159,7 +179,7 @@ const ArtistForm = () => {
                   </div>
                 ))}
               </div>
-            
+
             </div>
 
             <div>

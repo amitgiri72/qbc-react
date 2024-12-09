@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ClientHome.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 
 const getRelativeTime = (date) => {
@@ -25,11 +26,15 @@ const getRelativeTime = (date) => {
 };
 
 const ClientHome = () => {
+    const userId = Cookies.get('userId'); 
 
     const [jobs, setJobs] = useState([]);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-  
+    
+    const [user, setUser] = useState([]);
+  console.log("user",userId)
+
     // Fetch jobs data on component mount
     useEffect(() => {
         const fetchJobs = async () => {
@@ -45,41 +50,66 @@ const ClientHome = () => {
         fetchJobs();
     }, []);
 
+
+
+    const fetchUserDetails = async (userId) => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8080/api/v1/auth/user/${userId}`
+          );
+          if(response){
+            setUser(response.data.user);
+          }
+         
+        } catch (error) {
+          console.error(`Error fetching user details for ${userId}:`, error);
+        
+        }
+      };
+    
+ 
+    
+      useEffect(() => {
+        fetchUserDetails(userId);
+      }, []);
+
+
+
     function formatTime(time24) {
         const [hour, minute] = time24.split(':').map(Number); // Split and convert to numbers
         const ampm = hour >= 12 ? 'PM' : 'AM'; // Determine AM or PM
         const hour12 = hour % 12 || 12; // Convert to 12-hour format, ensuring 12:00 is handled correctly
         return `${hour12}:${minute.toString().padStart(2, '0')} ${ampm}`;
     }
-    
 
-    const viewProfile = async()=>{
+
+    const viewProfile = async () => {
         navigate("/view-profile")
     }
 
-    const navigatePage = async (id)=>{
+    const navigatePage = async (id) => {
         navigate(`/confirm-booking/${id}`)
     }
 
 
 
-  return (
-    <div className="clinet-home-dashboard">
-      <div className="client-home">
-        <h1>Hello Indiana</h1>
-        <button>View Profile</button>
-      </div>
-      <div className="artist-dash-b">
-        <h3>
-          Confirmed Bookings <span className="artist-dash-b-job">3</span>
-        </h3>
-        {/* <div className="artist-dash-b-left"></div> */}
-        <div className="artist-dash-b-right">
+    return (
+        <div className="clinet-home-dashboard">
+            <div className="client-home">
+                <h1>Hello <span style={{textTransform:"uppercase"}}>{user.name}</span></h1>
+                <button onClick={()=>viewProfile()}>View Profile</button>
+            </div>
+            <div className="artist-dash-b">
+                <h3>
+                    Confirmed Bookings <span className="artist-dash-b-job">3</span>
+                </h3>
+                {/* <div className="artist-dash-b-left"></div> */}
+                <div className="artist-dash-b-right">
                     {loading ? (
                         <p>Loading jobs...</p>
                     ) : jobs.length > 0 ? (
                         jobs.map((job, index) => (
-                            <div key={index} className="artist-dash-card" onClick={()=>navigatePage(job._id)}>
+                            <div key={index} className="artist-dash-card" onClick={() => navigatePage(job._id)}>
                                 <div className="artist-dash-card-1">
                                     <h4>{job.studioName}</h4>
                                     <p>{job.style}</p>
@@ -99,9 +129,9 @@ const ClientHome = () => {
                         <p>No jobs available</p>
                     )}
                 </div>
-      </div>
-    </div>
-  );
+            </div>
+        </div>
+    );
 };
 
 export default ClientHome;

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CheckIcon, XIcon } from "lucide-react";
 import axios from "axios";
 import "./ArtistForm.css";
+import Cookies from "js-cookie";
 
 const ArtistForm = () => {
+  const userId = Cookies.get('userId');
   const [selectedReviews, setSelectedReviews] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [bio, setBio] = useState("");
@@ -16,28 +18,35 @@ const ArtistForm = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [userId, setUserId] = useState("");
+  const [category, setCategory] = useState([]);
 
 
 
-  const checkAuth = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/v1/auth/verify-token', {
-        withCredentials: true
-      });
-      if(response){
-      setUserId(response.data.user._id);}
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Fetch category data
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service');
+        if (data.success) {
+          setCategory(data.service);
+          console.log(data.service);
+        }
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+
+    fetchCategory();
+  }, []);
 
 
-  const handleReviewSelection = (review) => {
-    if (selectedReviews.includes(review)) {
-      setSelectedReviews(selectedReviews.filter((r) => r !== review));
+  
+
+  const handleReviewSelection = (categoryId, categoryName) => {
+    if (selectedReviews.find(review => review.id === categoryId)) {
+      setSelectedReviews(selectedReviews.filter(review => review.id !== categoryId));
     } else {
-      setSelectedReviews([...selectedReviews, review]);
+      setSelectedReviews([...selectedReviews, { id: categoryId, name: categoryName }]);
     }
   };
 
@@ -62,12 +71,12 @@ const ArtistForm = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    checkAuth();
+    
     try {
       const formData = new FormData();
-      
+
       // Add text fields
-      formData.append('role', selectedReviews);
+      formData.append('category', selectedReviews.map(review => review.id));
       formData.append('stylesTeach', selectedServices);
       formData.append('bio', bio);
       formData.append('experience', experience);
@@ -75,11 +84,11 @@ const ArtistForm = () => {
       // Add files
       if (files.headshot) formData.append('headshot', files.headshot);
       if (files.resume) formData.append('resume', files.resume);
-      if (files.reference) formData.append('reference', files.reference);
+      if (files.reference) formData.append('refrenceLetter', files.reference);
       if (files.vss) formData.append('vss', files.vss);
 
-      
-      
+
+
 
       const response = await axios.post(
         `http://localhost:8080/api/v1/auth/update-user/${userId}`,
@@ -123,11 +132,11 @@ const ArtistForm = () => {
               </label>
               <div className="artist-form-services">
                 {selectedReviews.map((review) => (
-                  <div key={review} className="artist-form-services-card">
-                    <span>{review}</span>
+                  <div key={review.id} className="artist-form-services-card">
+                    <span>{review.name}</span>
                     <button
                       type="button"
-                      onClick={() => handleReviewSelection(review)}
+                      onClick={() => handleReviewSelection(review.id, review.name)}
                       className="text-white hover:text-gray-200 focus:outline-none"
                     >
                       <XIcon className="w-4 h-4" />
@@ -136,62 +145,21 @@ const ArtistForm = () => {
                 ))}
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="dance-educator"
-                    name="dance-educator"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedReviews.includes("Dance Educator")}
-                    onChange={() => handleReviewSelection("Dance Educator")}
-                  />
-                  <label htmlFor="dance-educator">Dance Educator</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="adjudicator"
-                    name="adjudicator"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedReviews.includes("Adjudicator")}
-                    onChange={() => handleReviewSelection("Adjudicator")}
-                  />
-                  <label htmlFor="adjudicator">Adjudicator</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="emcee"
-                    name="emcee"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedReviews.includes("Emcee")}
-                    onChange={() => handleReviewSelection("Emcee")}
-                  />
-                  <label htmlFor="emcee">Emcee</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="brand-ambassador"
-                    name="brand-ambassador"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedReviews.includes("Brand Ambassador")}
-                    onChange={() => handleReviewSelection("Brand Ambassador")}
-                  />
-                  <label htmlFor="brand-ambassador">Brand Ambassador</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="choreographer"
-                    name="choreographer"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedReviews.includes("Choreographer")}
-                    onChange={() => handleReviewSelection("Choreographer")}
-                  />
-                  <label htmlFor="choreographer">Choreographer</label>
-                </div>
+                {category.map((cat) => (
+                  <div key={cat._id} className="artistInput">
+                    <input
+                      type="checkbox"
+                      id={cat._id}
+                      name={cat.slug}
+                      className="form-checkbox h-5 w-5"
+                      checked={selectedReviews.some(review => review.id === cat._id)}
+                      onChange={() => handleReviewSelection(cat._id, cat.name)}
+                    />
+                    <label htmlFor={cat._id}>{cat.name}</label>
+                  </div>
+                ))}
               </div>
+            
             </div>
 
             <div>
@@ -373,9 +341,8 @@ const ArtistForm = () => {
                 ].map((exp) => (
                   <div
                     key={exp}
-                    className={`artist-experience-card ${
-                      experience === exp ? "active" : ""
-                    }`}
+                    className={`artist-experience-card ${experience === exp ? "active" : ""
+                      }`}
                     onClick={() => setExperience(exp)}
                   >
                     {exp}

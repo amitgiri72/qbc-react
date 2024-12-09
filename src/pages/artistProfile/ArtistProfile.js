@@ -1,9 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ArtistProfile.css";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ArtistProfile = () => {
+  const userId = Cookies.get("userId");
+  const [user, setUser] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [style, setStyle] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showResumeModal, setShowResumeModal] = useState(false);
+  const [showHeadshotModal, setShowHeadshotModal] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchUserDetails = async (userId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/auth/user/${userId}`
+      );
+      if (response) {
+        setUser(response.data.user);
+        if (response.data.user.category && response.data.user.category[0]) {
+          const categoryIds = response.data.user.category[0].split(",");
+          fetchCategoryDetails(categoryIds);
+        }
+        if (response.data.user.stylesTeach) {
+          const styles = response.data.user.stylesTeach[0].split(",");
+          setStyle(styles);
+        }
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(`Error fetching user details for ${userId}:`, error);
+      setLoading(false);
+    }
+  };
+
+  const fetchCategoryDetails = async (categoryIds) => {
+    try {
+      const categoryPromises = categoryIds.map((id) =>
+        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+      );
+      const categoryResponses = await Promise.all(categoryPromises);
+      const categoryData = categoryResponses.map((response) => response.data.service);
+      setCategories(categoryData);
+    } catch (error) {
+      console.error("Error fetching category details:", error);
+    }
+  };
+
+  const arrayBufferToBase64 = (buffer) => {
+    const binary = String.fromCharCode(...new Uint8Array(buffer));
+    return window.btoa(binary);
+  };
+
+  const handleResumeClick = () => setShowResumeModal(true);
+  const handleHeadshotClick = () => setShowHeadshotModal(true);
+  const closeModal = () => {
+    setShowResumeModal(false);
+    setShowHeadshotModal(false);
+  };
+
+  useEffect(() => {
+    fetchUserDetails(userId);
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="artist-profile-main">
       <div className="artist-profile">
@@ -12,31 +80,36 @@ const ArtistProfile = () => {
       <div className="artist-container">
         <div className="artist-top">
           <div className="artist-image">
-            <img src="images/se4.png" alt="artist" />
+            {user.headshot && (
+              <img
+                src={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(user.headshot.data.data)}`}
+                alt="artist headshot"
+              />
+            )}
           </div>
           <div className="artist-content">
             <div className="acs">
               <h6>Name</h6>
-              <div className="content-s">amit</div>
+              <div className="content-s">{user.name}</div>
             </div>
             <div className="acs">
               <h6>Style</h6>
               <div className="content-s">
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
+                {style.map((st, index) => (
+                  <div className="pspan" key={index}>
+                    {st}
+                  </div>
+                ))}
               </div>
             </div>
             <div className="acs">
               <h6>Services</h6>
               <div className="content-s">
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
-                <div className="pspan">azz</div>
+                {categories.map((category, index) => (
+                  <div className="pspan" key={category._id || index}>
+                    {category.name}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -45,85 +118,91 @@ const ArtistProfile = () => {
         <div className="artist-bottom">
           <h6>Bio</h6>
           <div className="content-sb">
-
-            <p>
-              Indiana Mehta, making her Hollywood Debut in Netflix Feature ‘Work
-              It’ is a professional actor, dancer, choreographer and teacher.
-              Her most recent work includes choreography for CBC’s SORT OF and
-              voicing a cartoon on Nickelodeon. Born in Mumbai, trained in
-              Indian Classical/Folk and Western dance forms (Ballet, Jazz,
-              Contemporary, Musical Theatre, Hip Hop and more) Indiana was the
-              first Indian to graduate from Laine Theatre Arts, UK with a
-              National Diploma in Performing Arts (Level 6). She also gained her
-              DDI in ISTD Ballet and Modern. Indiana is always on top of her
-              training and continues to take classes at The Underground Dance
-              Center and Metro Movement.
-            </p>
+            <p>{user.bio}</p>
           </div>
-
           <div className="abr">
             <div className="abrs">
               <h6>Resume</h6>
               <div className="content-s">
-                <div className="pspan">azz</div>
-                <div className="pspani">
-                  <img src="images/download.png" alt="" />
-                </div>
-
+                {user.resume ? (
+                  <>
+                    <div className="pspa" onClick={handleResumeClick}>
+                      View Resume
+                    </div>
+                    <a
+                      href={`data:${user.resume.contentType};base64,${arrayBufferToBase64(
+                        user.resume.data.data
+                      )}`}
+                      download="resume.pdf"
+                    >
+                      <div className="pspani">
+                        <img src="images/download.png" alt="Download Icon" />
+                      </div>
+                    </a>
+                  </>
+                ) : (
+                  <div className="pspan">No resume available</div>
+                )}
               </div>
             </div>
             <div className="abrs">
               <h6>Headshot</h6>
               <div className="content-s">
-                <div className="pspan">azz</div>
-                <div className="pspani">
-                  <img src="images/download.png" alt="" />
-                </div>
+                {user.headshot ? (
+                  <>
+                    <div className="pspa" onClick={handleHeadshotClick}>
+                      View Headshot
+                    </div>
+                    <a
+                      href={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
+                        user.headshot.data.data
+                      )}`}
+                      download="headshot.jpg"
+                    >
+                      <div className="pspani">
+                        <img src="images/download.png" alt="Download Icon" />
+                      </div>
+                    </a>
+                  </>
+                ) : (
+                  <div className="pspan">No headshot available</div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="artist-profile">
-        <h3>Explore Simillar Artists</h3>
-      </div>
-      {/* <div className="profile-artist-main"> */}
-        {/* <h3>Explore Simillar Artists</h3> */}
-        <div className="profile-artist-cards">
-        <div className="left-button">
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </div>
-          <div className="profile-artist-card">
-            <img src="images/se3.png" alt="img" />
-            <h4>card title</h4>
-            <p>subtitle</p>
-            <span>tag</span>
-          </div>
-          <div className="profile-artist-card">
-            <img src="images/se3.png" alt="img" />
-            <h4>card title</h4>
-            <p>subtitle</p>
-            <span>tag</span>
-          </div>
-          <div className="profile-artist-card">
-            <img src="images/se3.png" alt="img" />
-            <h4>card title</h4>
-            <p>subtitle</p>
-            <span>tag</span>
-          </div>
-          <div className="profile-artist-card">
-            <img src="images/se3.png" alt="img" />
-            <h4>card title</h4>
-            <p>subtitle</p>
-            <span>tag</span>
-          </div>
 
-          <div className="right-button">
-            <FontAwesomeIcon icon={faArrowRight} />
+      {/* Resume Modal */}
+      {showResumeModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content">
+            <iframe
+              src={`data:${user.resume.contentType};base64,${arrayBufferToBase64(
+                user.resume.data.data
+              )}`}
+              title="Resume"
+              width="100%"
+              style={{height:"80px"}}
+            ></iframe>
           </div>
         </div>
-        
-      {/* </div> */}
+      )}
+
+      {/* Headshot Modal */}
+      {showHeadshotModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content">
+            <img
+              src={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
+                user.headshot.data.data
+              )}`}
+              alt="Headshot"
+              style={{height:"80px"}}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

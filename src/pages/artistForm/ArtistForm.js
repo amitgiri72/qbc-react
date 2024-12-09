@@ -19,8 +19,8 @@ const ArtistForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [category, setCategory] = useState([]);
-const [user,setUser] = useState([]);
-
+  const [user, setUser] = useState(null);
+  const [userCategories, setUserCategories] = useState([]);
 
   // Fetch category data
   useEffect(() => {
@@ -29,7 +29,6 @@ const [user,setUser] = useState([]);
         const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service');
         if (data.success) {
           setCategory(data.service);
-          console.log(data.service);
         }
       } catch (error) {
         console.error("Error fetching services:", error);
@@ -39,28 +38,66 @@ const [user,setUser] = useState([]);
     fetchCategory();
   }, []);
 
+  // Fetch category details for user's categories
+  const fetchCategoryDetails = async (categoryIds) => {
+    try {
+      const categoryPromises = categoryIds.map(id =>
+        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+      );
+      const categoryResponses = await Promise.all(categoryPromises);
+      const categoryData = categoryResponses.map(response => response.data.service);
 
-// Fetch user details
-
-useEffect(() => {
-const fetchUserDetails = async () => {
-  try {
-    const response = await axios.get(
-      `http://localhost:8080/api/v1/auth/user/${userId}`
-    );
-    if (response) {
-      setUser(response.data.user);
-      console.log(response.data.user);
-     
-     
+      // Set the selected reviews based on fetched category data
+      const formattedCategories = categoryData.map(cat => ({
+        id: cat._id,
+        name: cat.name
+      }));
+      setSelectedReviews(formattedCategories);
+      setUserCategories(categoryData);
+    } catch (error) {
+      console.error('Error fetching category details:', error);
     }
-  } catch (error) {
-    console.error(`Error fetching user details for ${userId}:`, error);
-    setLoading(false);
-  }
-};
-fetchUserDetails();
-}, []);
+  };
+
+  // Fetch user details and populate form
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/auth/user/${userId}`
+        );
+        if (response.data.user) {
+          const userData = response.data.user;
+          setUser(userData);
+
+          // Set bio
+          setBio(userData.bio || "");
+
+          // Set experience
+          setExperience(userData.experience || "1 - 3 years");
+
+          // Handle categories
+          if (userData.category && userData.category[0]) {
+            const categoryIds = userData.category[0].split(',');
+            fetchCategoryDetails(categoryIds);
+          }
+
+          // Set selected services (styles)
+          if (userData.stylesTeach) {
+            const styles = userData.stylesTeach[0].split(',');
+            setSelectedServices(styles);
+          }
+        }
+      } catch (error) {
+        console.error(`Error fetching user details for ${userId}:`, error);
+        setLoading(false);
+      }
+    };
+
+    if (userId) {
+      fetchUserDetails();
+    }
+  }, [userId]);
 
   const handleReviewSelection = (categoryId, categoryName) => {
     if (selectedReviews.find(review => review.id === categoryId)) {
@@ -70,7 +107,8 @@ fetchUserDetails();
     }
   };
 
-
+  // Rest of the component remains the same...
+  // (Keep all the other functions and JSX exactly as they were in the previous version)
 
   const handleServiceSelection = (service) => {
     if (selectedServices.includes(service)) {
@@ -101,14 +139,11 @@ fetchUserDetails();
       formData.append('bio', bio);
       formData.append('experience', experience);
 
-      // Add files
+      // Add files only if new files are selected
       if (files.headshot) formData.append('headshot', files.headshot);
       if (files.resume) formData.append('resume', files.resume);
       if (files.reference) formData.append('refrenceLetter', files.reference);
       if (files.vss) formData.append('vss', files.vss);
-
-
-
 
       const response = await axios.post(
         `http://localhost:8080/api/v1/auth/update-user/${userId}`,
@@ -139,12 +174,12 @@ fetchUserDetails();
       </div>
       <div className="artist-form-main">
         <div className="artist-form-container">
-          <h1 className="">Welcome to the Artist Forum</h1>
+          <h1>Welcome to the Artist Forum</h1>
           <p className="artist-form-container-p">
-            Please fill out the registration form below to join our community of
-            talented dance artists.
+            Please update your information below or fill out the registration form to join our community.
           </p>
           <form onSubmit={handleSubmit} className="artist-form-div">
+            {/* Categories Section */}
             <div>
               <label className="mb-2 artist-label-head">
                 1. You would like to earn money as a{" "}
@@ -179,9 +214,8 @@ fetchUserDetails();
                   </div>
                 ))}
               </div>
-
             </div>
-
+            {/* Styles Section */}
             <div>
               <label className="mb-2 artist-label-head">
                 2. Styles you would like to teach{" "}
@@ -202,75 +236,23 @@ fetchUserDetails();
                 ))}
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="ballet"
-                    name="ballet"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedServices.includes("Ballet")}
-                    onChange={() => handleServiceSelection("Ballet")}
-                  />
-                  <label htmlFor="ballet">Ballet</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="ballroom"
-                    name="ballroom"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedServices.includes("Ballroom")}
-                    onChange={() => handleServiceSelection("Ballroom")}
-                  />
-                  <label htmlFor="ballroom">Ballroom</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="irish"
-                    name="irish"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedServices.includes("Irish")}
-                    onChange={() => handleServiceSelection("Irish")}
-                  />
-                  <label htmlFor="irish">Irish</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="jazz"
-                    name="jazz"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedServices.includes("Jazz")}
-                    onChange={() => handleServiceSelection("Jazz")}
-                  />
-                  <label htmlFor="jazz">Jazz</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="swing"
-                    name="swing"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedServices.includes("Swing")}
-                    onChange={() => handleServiceSelection("Swing")}
-                  />
-                  <label htmlFor="swing">Swing</label>
-                </div>
-                <div className="artistInput">
-                  <input
-                    type="checkbox"
-                    id="other"
-                    name="other"
-                    className="form-checkbox h-5 w-5"
-                    checked={selectedServices.includes("Other")}
-                    onChange={() => handleServiceSelection("Other")}
-                  />
-                  <label htmlFor="other">Other</label>
-                </div>
+                {["Ballet", "Ballroom", "Irish", "Jazz", "Swing", "Other"].map((style) => (
+                  <div key={style} className="artistInput">
+                    <input
+                      type="checkbox"
+                      id={style.toLowerCase()}
+                      name={style.toLowerCase()}
+                      className="form-checkbox h-5 w-5"
+                      checked={selectedServices.includes(style)}
+                      onChange={() => handleServiceSelection(style)}
+                    />
+                    <label htmlFor={style.toLowerCase()}>{style}</label>
+                  </div>
+                ))}
               </div>
             </div>
 
+            {/* Bio Section */}
             <div>
               <label htmlFor="bio" className="mb-2 artist-label-head">
                 3. Tell us about yourself{" "}
@@ -286,11 +268,13 @@ fetchUserDetails();
               />
             </div>
 
+            {/* File Upload Sections */}
             <div>
               <label htmlFor="headshot" className="mb-2 artist-label-head">
                 4. Upload your headshot{" "}
                 <span className="artist-form-head-span">(in image)</span>
               </label>
+              {user?.headshot && <p className="text-sm text-gray-500 mb-2">Current headshot uploaded</p>}
               <input
                 type="file"
                 id="headshot"
@@ -306,6 +290,7 @@ fetchUserDetails();
                 5. Upload your resume{" "}
                 <span className="artist-form-head-span">(in pdf)</span>
               </label>
+              {user?.resume && <p className="text-sm text-gray-500 mb-2">Current resume uploaded</p>}
               <input
                 type="file"
                 id="resume"
@@ -323,6 +308,7 @@ fetchUserDetails();
                   (both letter in one file (in pdf))
                 </span>
               </label>
+              {user?.refrenceLetter && <p className="text-sm text-gray-500 mb-2">Current reference letters uploaded</p>}
               <input
                 type="file"
                 id="reference"
@@ -338,6 +324,7 @@ fetchUserDetails();
                 7. Upload your Vulnerable Sector Screening (VSS){" "}
                 <span className="artist-form-head-span">(in pdf)</span>
               </label>
+              {user?.vss && <p className="text-sm text-gray-500 mb-2">Current VSS uploaded</p>}
               <input
                 type="file"
                 id="vss"
@@ -348,6 +335,7 @@ fetchUserDetails();
               />
             </div>
 
+            {/* Experience Section */}
             <div>
               <label className="mb-2 artist-label-head">
                 8. How many years of experience you have
@@ -361,8 +349,7 @@ fetchUserDetails();
                 ].map((exp) => (
                   <div
                     key={exp}
-                    className={`artist-experience-card ${experience === exp ? "active" : ""
-                      }`}
+                    className={`artist-experience-card ${experience === exp ? "active" : ""}`}
                     onClick={() => setExperience(exp)}
                   >
                     {exp}

@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import "./ViewProfile.css";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const ViewProfile = () => {
   const userId = Cookies.get('userId');
   const [user, setUser] = useState(null);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Fetch user details
   const fetchUserDetails = async (userId) => {
@@ -64,6 +66,12 @@ const ViewProfile = () => {
     const binary = String.fromCharCode(...new Uint8Array(buffer));
     return window.btoa(binary);
   };
+  const navigateEditPage = ()=>{
+    navigate("/artist-form");
+  }
+  const navigateArtistProfilePage = ()=>{
+    navigate("/artist-profile");
+  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -88,8 +96,8 @@ const ViewProfile = () => {
           </div>
         </div>
         <div className="artist-viewp-button">
-          <button className='artist-viewp-follow'>View Profile</button>
-          <button className='artist-viewp-message'>Edit Profile</button>
+          <button className='artist-viewp-follow'onClick={()=>navigateArtistProfilePage()}>View Profile</button>
+          <button className='artist-viewp-message' onClick={()=>navigateEditPage()}>Edit Profile</button>
         </div>
       </div>
 

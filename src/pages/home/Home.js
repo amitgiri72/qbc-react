@@ -14,7 +14,9 @@ import axios from "axios";
 const Home = () => {
 
   const [services, setServices] = useState([]);
+  const [artists,setArtists] = useState([]);
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const [currentArtistIndex, setArtistIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 
@@ -55,6 +57,49 @@ const Home = () => {
 
     fetchServices();
   }, []);
+
+
+
+    // Fetch artists and their categories
+    useEffect(() => {
+      const fetchArtists = async () => {
+        try {
+          const { data } = await axios.get('http://localhost:8080/api/v1/artist/get-all'); // Adjust API endpoint as needed
+          if (data.success) {
+            const artistsWithCategories = await Promise.all(
+              data.artists.map(async (artist) => {
+                if (artist.category && artist.category.length > 0) {
+                  const categoryIds = artist.category[0].split(",");
+                  const categories = await fetchCategoryDetails(categoryIds);
+                  return { ...artist, categories }; // Add fetched categories to the artist object
+                }
+                return { ...artist, categories: [] }; // Handle artists without categories
+              })
+            );
+            setArtists(artistsWithCategories);
+           
+          }
+        } catch (error) {
+          console.error("Error fetching artists:", error);
+        }
+      };
+  
+      fetchArtists();
+    }, []);
+  
+    const fetchCategoryDetails = async (categoryIds) => {
+      try {
+        const categoryPromises = categoryIds.map((id) =>
+          axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+        );
+        const categoryResponses = await Promise.all(categoryPromises);
+        return categoryResponses.map((response) => response.data.service); // Return category data
+      } catch (error) {
+        console.error("Error fetching category details:", error);
+        return [];
+      }
+    };
+  
 
   const arrayBufferToBase64 = (buffer) => {
     const binary = String.fromCharCode(...new Uint8Array(buffer));
@@ -167,7 +212,7 @@ const Home = () => {
 
       <div className="home-artist-main">
         <h3>Our Artists</h3>
-        {/* <div className="home-artist-cards">
+        <div className="home-artist-cards">
             <div className="left-button">
               <FontAwesomeIcon icon={faArrowLeft} />
             </div>
@@ -199,7 +244,7 @@ const Home = () => {
             <div className="right-button">
               <FontAwesomeIcon icon={faArrowRight} />
             </div>
-          </div> */}
+          </div>
 
       </div>
 

@@ -69,7 +69,32 @@ text-decoration-skip-ink: none;
     border-radius: 24px;
     margin-left:15px ;
 }
-
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+  }
+  
+  .pagination-number {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .pagination-number:hover {
+    background-color: #ddd;
+  }
+  
+  .pagination-number.active {
+    background-color: #AA1A12;
+    color: white;
+    font-weight: bold;
+  }
+  
 @media screen and (max-width: 764px) {
     .artist-main{
         margin-top: 70px;

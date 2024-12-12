@@ -5,6 +5,10 @@ import axios from 'axios';
 
 const Artist = () => {
   const [artists, setArtists] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const artistsPerPage = 8; // Number of artists to display per page
 
   // Fetch artists and their categories
   useEffect(() => {
@@ -23,6 +27,7 @@ const Artist = () => {
             })
           );
           setArtists(artistsWithCategories);
+          setTotalPages(Math.ceil(artistsWithCategories.length / artistsPerPage)); // Calculate total pages
         }
       } catch (error) {
         console.error("Error fetching artists:", error);
@@ -54,6 +59,27 @@ const Artist = () => {
     return window.btoa(binary);
   };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const displayedArtists = artists.slice(
+    (currentPage - 1) * artistsPerPage,
+    currentPage * artistsPerPage
+  );
+
+  const renderPageNumbers = () => {
+    return Array.from({ length: totalPages }, (_, index) => (
+      <button
+        key={index + 1}
+        className={`pagination-number ${currentPage === index + 1 ? 'active' : ''}`}
+        onClick={() => handlePageChange(index + 1)}
+      >
+        {index + 1}
+      </button>
+    ));
+  };
+
   return (
     <div className='artist-main'>
       <Navbar />
@@ -62,8 +88,8 @@ const Artist = () => {
       </div>
 
       <div className="a-cards">
-        {artists.length > 0 ? (
-          artists.map((artist) => {
+        {displayedArtists.length > 0 ? (
+          displayedArtists.map((artist) => {
             const base64Image = `data:${artist.headshot.contentType};base64,${arrayBufferToBase64(artist.headshot.data.data)}`;
             return (
               <div className="a-card" key={artist._id}>
@@ -85,6 +111,10 @@ const Artist = () => {
         ) : (
           <p>Loading artists...</p>
         )}
+      </div>
+
+      <div className="pagination">
+        {renderPageNumbers()}
       </div>
     </div>
   );

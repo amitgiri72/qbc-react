@@ -29,6 +29,7 @@ text-decoration-skip-ink: none;
     margin-top: 40px;
     display: flex;
     gap: 40px;
+    align-items: center;
     /* justify-content: space-between; */
     flex-wrap: wrap;
   }

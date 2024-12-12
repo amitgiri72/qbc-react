@@ -15,7 +15,7 @@ const PrivateRoute = () => {
              const res =   await axios.get('http://localhost:8080/api/v1/auth/verify-token', { withCredentials: true });
                if(res){ setIsAuthenticated(true);
                     console.log(res.data.user._id)
-                    Cookies.set('userId', res.data.user._id, { expires: 7 });
+                    // Cookies.set('userId', res.data.user._id, { expires: 7 });
                }
             } catch {
                 setIsAuthenticated(false);

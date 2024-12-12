@@ -63,8 +63,8 @@ const Register = () => {
                         onChange={(e) => setRole(e.target.value)}
                     >
                         <option value="">Select your role</option>
-                        <option value="artist">You are an Artist</option>
-                        <option value="client">Looking for Artist</option>
+                        <option value="Artist">You are an Artist</option>
+                        <option value="Client">Looking for Artist</option>
                     </select>
                     
                     <input 

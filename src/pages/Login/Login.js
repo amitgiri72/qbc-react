@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./Login.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -24,11 +25,15 @@ const Login = () => {
                 { email, password },
                 { withCredentials: true } // Ensures cookies are sent with the request
             );
+            if(response){
+                Cookies.set('userId', response.data.user._id, { expires: 7 });
             const from = location.state?.from?.pathname || '/';
+            console.log("amit",response.data)
             navigate(from, { replace: true });
             toast.success("Login");
             setSuccess(response.data.message || 'Login successful!');
             setError('');
+            }
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed');
             setSuccess('');

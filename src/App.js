@@ -105,6 +105,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import PrivateRoute from './PrivateRoute';
 import { ToastContainer } from 'react-toastify';
+import PrivateRouteClient from './PrivateRouteClient';
 
 function App() {
     const location = useLocation();
@@ -148,6 +149,18 @@ function App() {
                     <Route path="/view-profile" element={<ViewProfile />} />
                     <Route path="/dashboard-jobs" element={<ArtistDJobs />} />
                     <Route path="/job-offer/:id" element={<JobOffer />} />
+                    {/* <Route path="/client-home" element={<ClientHome />} />
+                    <Route path="/client-jobs" element={<ConfirmedJobs />} />
+                    <Route path="/create-job" element={<CreateJob />} />
+                    <Route path="/confirm-booking/:id" element={<ConfirmedBooking />} />
+                    <Route path="/booking-request/:id" element={<BookingRequest />} /> */}
+                </Route>
+                {/* Protected Routes for client */}
+                <Route element={<PrivateRouteClient />}>
+                    {/* <Route path="/artist-dashboard" element={<ArtistHome />} />
+                    <Route path="/view-profile" element={<ViewProfile />} />
+                    <Route path="/dashboard-jobs" element={<ArtistDJobs />} />
+                    <Route path="/job-offer/:id" element={<JobOffer />} /> */}
                     <Route path="/client-home" element={<ClientHome />} />
                     <Route path="/client-jobs" element={<ConfirmedJobs />} />
                     <Route path="/create-job" element={<CreateJob />} />

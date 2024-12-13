@@ -102,7 +102,7 @@ const Artist = () => {
                       <span key={category._id}>{category.name}</span>
                     ))
                   ) : (
-                    <p>No categories available</p>
+                    <p></p>
                   )}
                 </div>
               </div>

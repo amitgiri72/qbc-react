@@ -64,3 +64,26 @@ text-decoration-skip-ink: none;
 background-color: #fff;
 color: #AA1A12;
 }
+
+
+
+.motion-container {
+    position: absolute;
+    animation: moveTrain 8s linear infinite;
+  }
+  
+  @keyframes moveTrain {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(100px, 0);
+    }
+    50% {
+      transform: translate(0, 100px);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  

@@ -14,9 +14,11 @@ import axios from "axios";
 const Home = () => {
 
   const [services, setServices] = useState([]);
-  const [artists,setArtists] = useState([]);
+  const [artists, setArtists] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
-  const [currentArtistIndex, setArtistIndex] = useState(0);
+  const [currentArtistIndex, setCurrentArtistIndex] = useState(0);
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 
@@ -34,6 +36,7 @@ const Home = () => {
       setWindowWidth(window.innerWidth);
       // Reset current index when screen size changes to prevent empty spaces
       setCurrentServiceIndex(0);
+      setCurrentArtistIndex(0);
     };
 
     window.addEventListener('resize', handleResize);
@@ -58,48 +61,64 @@ const Home = () => {
     fetchServices();
   }, []);
 
-
-
-    // Fetch artists and their categories
-    useEffect(() => {
-      const fetchArtists = async () => {
-        try {
-          const { data } = await axios.get('http://localhost:8080/api/v1/artist/get-all'); // Adjust API endpoint as needed
-          if (data.success) {
-            const artistsWithCategories = await Promise.all(
-              data.artists.map(async (artist) => {
-                if (artist.category && artist.category.length > 0) {
-                  const categoryIds = artist.category[0].split(",");
-                  const categories = await fetchCategoryDetails(categoryIds);
-                  return { ...artist, categories }; // Add fetched categories to the artist object
-                }
-                return { ...artist, categories: [] }; // Handle artists without categories
-              })
-            );
-            setArtists(artistsWithCategories);
-           
-          }
-        } catch (error) {
-          console.error("Error fetching artists:", error);
-        }
-      };
-  
-      fetchArtists();
-    }, []);
-  
-    const fetchCategoryDetails = async (categoryIds) => {
+  // Fetch testimonial data
+  useEffect(() => {
+    const fetchTestimonial = async () => {
       try {
-        const categoryPromises = categoryIds.map((id) =>
-          axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
-        );
-        const categoryResponses = await Promise.all(categoryPromises);
-        return categoryResponses.map((response) => response.data.service); // Return category data
+        const { data } = await axios.get('http://localhost:8080/api/v1/testimonial/get-testimonial');
+        if (data.success) {
+          setTestimonials(data.testimonial);
+        }
       } catch (error) {
-        console.error("Error fetching category details:", error);
-        return [];
+        console.error("Error fetching services:", error);
       }
     };
-  
+
+    fetchTestimonial();
+  }, []);
+
+
+
+  // Fetch artists and their categories
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:8080/api/v1/artist/get-all'); // Adjust API endpoint as needed
+        if (data.success) {
+          const artistsWithCategories = await Promise.all(
+            data.artists.map(async (artist) => {
+              if (artist.category && artist.category.length > 0) {
+                const categoryIds = artist.category[0].split(",");
+                const categories = await fetchCategoryDetails(categoryIds);
+                return { ...artist, categories }; // Add fetched categories to the artist object
+              }
+              return { ...artist, categories: [] }; // Handle artists without categories
+            })
+          );
+          setArtists(artistsWithCategories);
+
+        }
+      } catch (error) {
+        console.error("Error fetching artists:", error);
+      }
+    };
+
+    fetchArtists();
+  }, []);
+
+  const fetchCategoryDetails = async (categoryIds) => {
+    try {
+      const categoryPromises = categoryIds.map((id) =>
+        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+      );
+      const categoryResponses = await Promise.all(categoryPromises);
+      return categoryResponses.map((response) => response.data.service); // Return category data
+    } catch (error) {
+      console.error("Error fetching category details:", error);
+      return [];
+    }
+  };
+
 
   const arrayBufferToBase64 = (buffer) => {
     const binary = String.fromCharCode(...new Uint8Array(buffer));
@@ -121,16 +140,61 @@ const Home = () => {
     });
   };
 
+  const handlePrevArtists = () => {
+    setCurrentArtistIndex((prevIndex) => {
+      const newIndex = prevIndex - getServicesPerPage();
+      return newIndex < 0 ? 0 : newIndex;
+    });
+  };
+
+  const handleNextArtists = () => {
+    setCurrentArtistIndex((prevIndex) => {
+      const newIndex = prevIndex + getServicesPerPage();
+      const maxStartIndex = Math.max(0, artists.length - getServicesPerPage());
+      return newIndex >= maxStartIndex ? maxStartIndex : newIndex;
+    });
+  };
+
   // Get current services to display
   const currentServices = services.slice(
     currentServiceIndex,
     currentServiceIndex + getServicesPerPage()
   );
+  // Get current services to display
+  const currentArtists = artists.slice(
+    currentArtistIndex,
+    currentArtistIndex + getServicesPerPage()
+  );
 
   // Check if navigation buttons should be enabled
   const canGoBack = currentServiceIndex > 0;
   const canGoForward = currentServiceIndex + getServicesPerPage() < services.length;
+  // Check if navigation buttons should be enabled
+  const canGoBackArtist = currentArtistIndex > 0;
+  const canGoForwardArtist = currentArtistIndex + getServicesPerPage() < artists.length;
 
+
+  const handleNextTestimonial = () => {
+    setCurrentTestimonialIndex((prevIndex) =>
+      (prevIndex + 1) % testimonials.length
+    );
+  };
+
+  const handlePrevTestimonial = () => {
+    setCurrentTestimonialIndex((prevIndex) =>
+      (prevIndex - 1 + testimonials.length) % testimonials.length
+    );
+  };
+
+
+  const arrayBufferToBase64Artist = (buffer) => {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    for (let i = 0; i < bytes.length; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  };
   return (
     <div>
       <Navbar />
@@ -213,38 +277,50 @@ const Home = () => {
       <div className="home-artist-main">
         <h3>Our Artists</h3>
         <div className="home-artist-cards">
-            <div className="left-button">
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </div>
-            <div className="home-artist-card">
-              <img src="images/se3.png" alt="img" />
-              <h4>card title</h4>
-              <p>subtitle</p>
-              <span>tag</span>
-            </div>
-            <div className="home-artist-card">
-              <img src="images/se3.png" alt="img" />
-              <h4>card title</h4>
-              <p>subtitle</p>
-              <span>tag</span>
-            </div>
-            <div className="home-artist-card">
-              <img src="images/se3.png" alt="img" />
-              <h4>card title</h4>
-              <p>subtitle</p>
-              <span>tag</span>
-            </div>
-            <div className="home-artist-card">
-              <img src="images/se3.png" alt="img" />
-              <h4>card title</h4>
-              <p>subtitle</p>
-              <span>tag</span>
-            </div>
 
-            <div className="right-button">
-              <FontAwesomeIcon icon={faArrowRight} />
-            </div>
+          <div
+            className={`left-button ${!canGoBackArtist ? 'disabled' : ''}`}
+            onClick={canGoBackArtist ? handlePrevArtists : undefined}
+            style={{ opacity: canGoBackArtist ? 1 : 0.5, cursor: canGoBackArtist ? 'pointer' : 'default' }}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
           </div>
+
+          <div className="service-cards-container">
+            {artists.length > 0 ? (
+              currentArtists.map((artist) => {
+                const base64Image = `data:${artist.headshot.contentType};base64,${arrayBufferToBase64Artist(artist.headshot.data.data)}`;
+
+                return (
+                  <div className="home-artist-card" key={artist._id}>
+                    <img src={base64Image} alt={artist.name} />
+                    <h4>{artist.name}</h4>
+                    <p>{artist.city}</p>
+                    <div className="artist-cat-s">
+                      {artist.categories.length > 0 ? (
+                        artist.categories.slice(0, 3).map((category) => ( // Limit to max 3 categories
+                          <span key={category._id}>{category.name}</span>
+                        ))
+                      ) : (
+                        <p></p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p>Loading artists...</p>
+            )}
+          </div>
+
+          <div
+            className={`right-button ${!canGoForwardArtist ? 'disabled' : ''}`}
+            onClick={canGoForwardArtist ? handleNextArtists : undefined}
+            style={{ opacity: canGoForwardArtist ? 1 : 0.5, cursor: canGoForwardArtist ? 'pointer' : 'default' }}
+          >
+            <FontAwesomeIcon icon={faArrowRight} />
+          </div>
+        </div>
 
       </div>
 
@@ -256,37 +332,63 @@ const Home = () => {
 
 
         <div className="artist-testimonial-cards">
-          <div className="left-button">
+          <div
+            className="left-button"
+            onClick={handlePrevTestimonial}
+            style={{
+              opacity: testimonials.length > 1 ? 1 : 0.5,
+              cursor: testimonials.length > 1 ? "pointer" : "default",
+            }}
+          >
             <FontAwesomeIcon icon={faArrowLeft} />
           </div>
-          <div className="artist-tesimonial-card">
-            <div className="artist-testimonial">
-              <div className="artist-testimonial-img">
-                <img src="images/se3.png" alt="img" />
-              </div>
-              <div className="artist-testimonial-text">
-                <div className="artist-testimonial-text-card">
-                  <p>Kristin Watson</p>
-                  <p>Marketing</p>
-                  <p>Cordinate</p>
+          {testimonials.length > 0 ? (
+            <div className="artist-tesimonial-card">
+              <div className="artist-testimonial">
+                <div className="artist-testimonial-img">
+                  {testimonials[currentTestimonialIndex]?.photo && (
+                    <img
+                      src={`data:${testimonials[currentTestimonialIndex]?.photo.contentType};base64,${arrayBufferToBase64Artist(
+                        testimonials[currentTestimonialIndex]?.photo.data.data
+                      )}`}
+                      alt={testimonials[currentTestimonialIndex]?.name}
+                      className="testimonial-image"
+                    />
+                  )}
                 </div>
-                <div className="artist-testimonial-text-card">
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                  <FontAwesomeIcon icon={faStar} />
-                  <p>Testimonial</p>
+                <div className="artist-testimonial-text">
+                  <div className="artist-testimonial-text-card">
+                    <p>{testimonials[currentTestimonialIndex]?.name}</p>
+                    <p>{testimonials[currentTestimonialIndex]?.category}</p>
+                    <p>Cordinate</p>
+                  </div>
+                  <div className="artist-testimonial-text-card">
+                    <FontAwesomeIcon icon={faStar} />
+                    <FontAwesomeIcon icon={faStar} />
+                    <FontAwesomeIcon icon={faStar} />
+                    <FontAwesomeIcon icon={faStar} />
+                    <FontAwesomeIcon icon={faStar} />
+                    <p>Testimonial</p>
+                  </div>
                 </div>
               </div>
+
+              <p className="artist-testimonial-p">
+                {testimonials[currentTestimonialIndex]?.comment}
+              </p>
+
             </div>
-
-            <p className="artist-testimonial-p">
-              Building relationships and having fun through community events.
-            </p>
-          </div>
-
-          <div className="left-button">
+          ) : (
+            <p>Loading testimonials...</p>
+          )}
+          <div
+            className="left-button"
+            onClick={handleNextTestimonial}
+            style={{
+              opacity: testimonials.length > 1 ? 1 : 0.5,
+              cursor: testimonials.length > 1 ? "pointer" : "default",
+            }}
+          >
             <FontAwesomeIcon icon={faArrowRight} />
           </div>
         </div>

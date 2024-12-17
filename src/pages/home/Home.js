@@ -197,7 +197,7 @@ const Home = () => {
   };
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <HeroSection />
       <div className="home-services-main">
         <h3>Our Services</h3>

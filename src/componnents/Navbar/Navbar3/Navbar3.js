@@ -1,11 +1,9 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-const Navbar = () => {
+const Navbar3 = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
@@ -33,9 +31,9 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Artists', path: '/artist' },
-    { name: 'Services', path: '/services' },
+    { name: 'cDashboard', path: '/client-home' },
+    { name: 'Bookings', path: '/client-jobs' },
+    { name: 'Create Job', path: '/create-job' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -121,9 +119,9 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center space-x-4">
+          {/* <div className="hidden md:flex items-center space-x-4">
             <AuthButtons />
-          </div>
+          </div> */}
 
           <div className="md:hidden">
             <button
@@ -154,9 +152,9 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-4 pb-3 border-t border-gray-100">
+            {/* <div className="pt-4 pb-3 border-t border-gray-100">
               <MobileAuthButtons />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -164,4 +162,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar3;

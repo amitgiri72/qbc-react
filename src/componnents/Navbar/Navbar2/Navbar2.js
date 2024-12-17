@@ -53,7 +53,7 @@ const Navbar2 = () => {
                     </div>
 
                     {/* Auth Buttons - Desktop */}
-                    <div className="hidden md:flex items-center space-x-4">
+                    {/* <div className="hidden md:flex items-center space-x-4">
                         <Link
                             to="/login"
                             className="text-sm font-medium px-6 py-2 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-[30px]"
@@ -66,7 +66,7 @@ const Navbar2 = () => {
                         >
                             SignUp
                         </Link>
-                    </div>
+                    </div> */}
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden">
@@ -99,7 +99,7 @@ const Navbar2 = () => {
                                 {item.name}
                             </Link>
                         ))}
-                        <div className="pt-4 pb-3 border-t border-gray-100">
+                        {/* <div className="pt-4 pb-3 border-t border-gray-100">
                             <Link
                                 to="/login"
                                 className="block w-full px-3 py-2 text-sm font-medium border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md mb-2"
@@ -112,7 +112,7 @@ const Navbar2 = () => {
                             >
                                 SignUp
                             </Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

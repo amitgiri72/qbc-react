@@ -7,8 +7,28 @@ import axios from 'axios';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [role, setRole] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
+
+
+  useEffect(() => {
+    const checkRole = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/v1/auth/check-role', {
+                withCredentials: true
+            });
+            if (response) {
+                console.log(response.data.userRole);
+                setRole(response.data.userRole);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+    checkRole();
+}, [isAuthenticated]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -43,14 +63,24 @@ const Navbar = () => {
     return location.pathname === path;
   };
 
-  const AuthButtons = () => (
-    isAuthenticated ? (
-      <Link
-        to="/artist-dashboard"
-        className="text-sm font-medium px-6 py-2 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-[30px]"
-      >
-        Dashboard
-      </Link>
+  const AuthButtons = () => {
+    let dashboardLink = null;
+  
+    if (role === 'Artist') {
+      dashboardLink = '/artist-dashboard';
+    } else if (role === 'Client') {
+      dashboardLink = '/client-home';
+    }
+  
+    return isAuthenticated ? (
+      dashboardLink ? (
+        <Link
+          to={dashboardLink}
+          className="text-sm font-medium px-6 py-2 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-[30px]"
+        >
+          Dashboard
+        </Link>
+      ) : null // Don't show anything if role is neither 'Artist' nor 'Client'
     ) : (
       <>
         <Link
@@ -66,17 +96,27 @@ const Navbar = () => {
           SignUp
         </Link>
       </>
-    )
-  );
-
-  const MobileAuthButtons = () => (
-    isAuthenticated ? (
-      <Link
-        to="/artist-dashboard"
-        className="block w-full px-3 py-2 text-sm font-medium border-1 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md"
-      >
-        Dashboard
-      </Link>
+    );
+  };
+  
+  const MobileAuthButtons = () => {
+    let dashboardLink = null;
+  
+    if (role === 'Artist') {
+      dashboardLink = '/artist-dashboard';
+    } else if (role === 'Client') {
+      dashboardLink = '/client-home';
+    }
+  
+    return isAuthenticated ? (
+      dashboardLink ? (
+        <Link
+          to={dashboardLink}
+          className="block w-full px-3 py-2 text-sm font-medium border-1 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md"
+        >
+          Dashboard
+        </Link>
+      ) : null // Don't show anything if role is neither 'Artist' nor 'Client'
     ) : (
       <>
         <Link
@@ -92,8 +132,9 @@ const Navbar = () => {
           SignUp
         </Link>
       </>
-    )
-  );
+    );
+  };
+  
 
   return (
     <nav className="w-full bg-white shadow-sm fixed top-0 left-0 z-50 font-vietnam">

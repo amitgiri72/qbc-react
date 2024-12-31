@@ -58,7 +58,7 @@ const Navbar3 = () => {
           Login
         </Link>
         <Link
-          to="/signup"
+          to="/register"
           className="text-sm font-medium px-6 py-2 border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 rounded-[30px]"
         >
           SignUp
@@ -84,7 +84,7 @@ const Navbar3 = () => {
           Login
         </Link>
         <Link
-          to="/signup"
+          to="/register"
           className="block w-full px-3 py-2 text-sm font-medium border-1 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 rounded-md"
         >
           SignUp

@@ -19,7 +19,7 @@ const ArtistProfile = () => {
   const fetchUserDetails = async (userId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/auth/user/${userId}`
+        `https://qbc-backend.onrender.com/api/v1/auth/user/${userId}`
       );
       if (response) {
         setUser(response.data.user);
@@ -42,7 +42,7 @@ const ArtistProfile = () => {
   const fetchCategoryDetails = async (categoryIds) => {
     try {
       const categoryPromises = categoryIds.map((id) =>
-        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+        axios.get(`https://qbc-backend.onrender.com/api/v1/service/single-service/${id.trim()}`)
       );
       const categoryResponses = await Promise.all(categoryPromises);
       const categoryData = categoryResponses.map((response) => response.data.service);
@@ -121,10 +121,10 @@ const ArtistProfile = () => {
               <div className="content-s">
                 {user.resume ? (
                   <>
-                  <div className="pspan" onClick={() => setActiveModal("resume")}>
-                    View Resume
-                  </div>
-                  <a
+                    <div className="pspan" onClick={() => setActiveModal("resume")}>
+                      View Resume
+                    </div>
+                    <a
                       href={`data:${user.resume.contentType};base64,${arrayBufferToBase64(
                         user.resume.data.data
                       )}`}
@@ -134,7 +134,7 @@ const ArtistProfile = () => {
                         <img src="images/download.png" alt="Download Icon" />
                       </div>
                     </a>
-                </>
+                  </>
                 ) : (
                   <div className="pspan">No resume available</div>
                 )}
@@ -145,19 +145,19 @@ const ArtistProfile = () => {
               <div className="content-s">
                 {user.headshot ? (
                   <>
-                  <div className="pspan" onClick={() => setActiveModal("headshot")}>
-                    View Headshot
-                  </div>
-                  <a
-                  href={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
-                    user.headshot.data.data
-                  )}`}
-                  download="headshot.jpg"
-                >
-                  <div className="pspani">
-                    <img src="images/download.png" alt="Download Icon" />
-                  </div>
-                </a>
+                    <div className="pspan" onClick={() => setActiveModal("headshot")}>
+                      View Headshot
+                    </div>
+                    <a
+                      href={`data:${user.headshot.contentType};base64,${arrayBufferToBase64(
+                        user.headshot.data.data
+                      )}`}
+                      download="headshot.jpg"
+                    >
+                      <div className="pspani">
+                        <img src="images/download.png" alt="Download Icon" />
+                      </div>
+                    </a>
                   </>
                 ) : (
                   <div className="pspan">No headshot available</div>

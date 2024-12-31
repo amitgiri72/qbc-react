@@ -45,7 +45,7 @@ const JobOffer = () => {
   const handleGetJob = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/job/job-detail/${jobId}`
+        `https://qbc-backend.onrender.com/api/v1/job/job-detail/${jobId}`
       );
       if (response) {
         setJobOffer(response.data.job);
@@ -58,7 +58,7 @@ const JobOffer = () => {
   const handleConfirmJob = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/v1/job/users/${jobId}`,{userId,notes}
+        `https://qbc-backend.onrender.com/api/v1/job/users/${jobId}`,{userId,notes}
       );
       if (response) {
         toast.success("Job applied successfully")
@@ -102,7 +102,7 @@ const JobOffer = () => {
         <div className="job-offer-info-details">
           <h3>Details</h3>
           <h5>
-            Dates: <span>{jobOffer.startDate && new Date(jobOffer.startDate).toDateString()} - {jobOffer.endDate && new Date(jobOffer.endDate).toDateString()}</span>
+            Date/s: <span>{jobOffer.startDate && new Date(jobOffer.startDate).toDateString()} - {jobOffer.endDate && new Date(jobOffer.endDate).toDateString()}</span>
           </h5>
           <h5>
             Time: <span>{jobOffer.from && formatTime(jobOffer.from)} - {jobOffer.to && formatTime(jobOffer.to)}</span>
@@ -115,7 +115,7 @@ const JobOffer = () => {
 
         <div className="job-offer-additional">
           <h3>Additional Information</h3>
-          <textarea placeholder="Enter some additional info you would like to add" value={notes}
+          <textarea placeholder="Anything else you would like us to know" value={notes}
             onChange={(e) => setNotes(e.target.value)} />
         </div>
         <div className="job-offer-button">

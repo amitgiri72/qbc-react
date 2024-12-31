@@ -36,7 +36,7 @@
 //     useEffect(() => {
 //         const checkAuth = async () => {
 //           try {
-//             const response = await axios.get('http://localhost:8080/api/v1/auth/check-role', {
+//             const response = await axios.get('https://qbc-backend.onrender.com/api/v1/auth/check-role', {
 //               withCredentials: true
 //             });
 //             if(response){
@@ -158,7 +158,7 @@ function App() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/v1/auth/check-role', {
+                const response = await axios.get('https://qbc-backend.onrender.com/api/v1/auth/check-role', {
                     withCredentials: true
                 });
                 if (response) {

@@ -11,7 +11,7 @@ const Navbar3 = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/auth/verify-token', {
+        const response = await axios.get('https://qbc-backend.onrender.com/api/v1/auth/verify-token', {
           withCredentials: true
         });
         if(response){
@@ -31,7 +31,7 @@ const Navbar3 = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'cDashboard', path: '/client-home' },
+    { name: 'Dashboard', path: '/client-home' },
     { name: 'Bookings', path: '/client-jobs' },
     { name: 'Create Job', path: '/create-job' },
     { name: 'Contact', path: '/contact' }

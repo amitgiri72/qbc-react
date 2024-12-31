@@ -14,7 +14,7 @@ const Artist = () => {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const { data } = await axios.get('http://localhost:8080/api/v1/artist/get-all'); // Adjust API endpoint as needed
+        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/artist/get-all'); // Adjust API endpoint as needed
         if (data.success) {
           const artistsWithCategories = await Promise.all(
             data.artists.map(async (artist) => {
@@ -40,7 +40,7 @@ const Artist = () => {
   const fetchCategoryDetails = async (categoryIds) => {
     try {
       const categoryPromises = categoryIds.map((id) =>
-        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+        axios.get(`https://qbc-backend.onrender.com/api/v1/service/single-service/${id.trim()}`)
       );
       const categoryResponses = await Promise.all(categoryPromises);
       return categoryResponses.map((response) => response.data.service); // Return category data

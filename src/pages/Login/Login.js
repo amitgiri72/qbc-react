@@ -21,7 +21,7 @@ const Login = () => {
 
         try {
             const response = await axios.post(
-                'http://localhost:8080/api/v1/auth/login', 
+                'https://qbc-backend.onrender.com/api/v1/auth/login', 
                 { email, password },
                 { withCredentials: true } // Ensures cookies are sent with the request
             );
@@ -51,7 +51,7 @@ const Login = () => {
                 <div className="login-content">
                     <h2>Unleash Your Creativity</h2>
 
-                    <p>Welcome back! Join the vibrant community of artists and enthusiasts at Shruti Baghela’s creative space. Share your work, discover new art.</p>
+                    <p>Welcome back to QBC! Join a vibrant community of dancer educators and artists, share your passion and earn a living doing what you love.</p>
                     
                     <input 
                         type="text" 

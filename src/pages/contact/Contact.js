@@ -9,10 +9,10 @@ const Contact = () => {
     <div className="contact">
     <div className="contact-left">
         <h1>Get in Touch</h1>
-        <p>Our Experienced and knowlegable team is dedicated to provide you exceptional customer service.</p>
+        {/* <p>Our Experienced and knowlegable team is dedicated to provide you exceptional customer service.</p> */}
         <div className="contact-form">
             <div className="contact-form-item">
-            <label htmlFor="name">Your Name</label>
+            <label htmlFor="name">Name</label>
             <input type="text" placeholder='john doe'/>
             </div>
             <div className="contact-form-item">
@@ -21,7 +21,7 @@ const Contact = () => {
             <input type="email" placeholder='johndoe@email.com'/>
             </div>
             <div className="contact-form-item">
-            <label htmlFor="name">your message</label>
+            <label htmlFor="name">Message</label>
             <textarea  placeholder='enter your message here' rows="4" cols="50"/>
             </div>
 
@@ -35,7 +35,7 @@ const Contact = () => {
         <div className="contact-right-info">
             <div className="contact-address">
             <FontAwesomeIcon icon={faLocationDot} />
-            <p>Canada</p>
+            <p>Toronto, Canada</p>
             </div>
             <div className="contact-address">
             <FontAwesomeIcon icon={faEnvelope} />

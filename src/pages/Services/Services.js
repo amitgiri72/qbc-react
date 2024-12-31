@@ -10,7 +10,7 @@ const Services = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service'); // Adjust API endpoint as needed
+        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/service/get-service'); // Adjust API endpoint as needed
         if (data.success) {
           setServices(data.service);
         }
@@ -32,10 +32,9 @@ const Services = () => {
     <div className='services-main'>
       <Navbar />
       <div className="services">
-        <h3>For Clients</h3>
+        <h3>Our Services</h3>
         <p>
-          We are passionate about providing a space where food enthusiasts from all walks of life can come together to inspire and be inspired. 
-          Whether you're a seasoned chef or a home cook, our platform is designed to make sharing your culinary creations easy and enjoyable.
+        Hire the best in the industry! From a wide range of Dance Educators, Adjudicators, Choreographers to promo work staff, QUICK BALL CHANGE has your needs covered. Our artists are available for supply teaching, year long contracts, workshops, camps & Intensives, audition skills & etiquettes, adjudicating and choreographing for competitions and promo staff for your next event.
         </p>
       </div>
 

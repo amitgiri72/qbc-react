@@ -9,6 +9,10 @@ const ArtistForm = () => {
   const [selectedReviews, setSelectedReviews] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [bio, setBio] = useState("");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
   const [experience, setExperience] = useState("1 - 3 years");
   const [files, setFiles] = useState({
     headshot: null,
@@ -26,7 +30,7 @@ const ArtistForm = () => {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service');
+        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/service/get-service');
         if (data.success) {
           setCategory(data.service);
         }
@@ -42,7 +46,7 @@ const ArtistForm = () => {
   const fetchCategoryDetails = async (categoryIds) => {
     try {
       const categoryPromises = categoryIds.map(id =>
-        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+        axios.get(`https://qbc-backend.onrender.com/api/v1/service/single-service/${id.trim()}`)
       );
       const categoryResponses = await Promise.all(categoryPromises);
       const categoryData = categoryResponses.map(response => response.data.service);
@@ -64,14 +68,19 @@ const ArtistForm = () => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/v1/auth/user/${userId}`
+          `https://qbc-backend.onrender.com/api/v1/auth/user/${userId}`
         );
         if (response.data.user) {
           const userData = response.data.user;
           setUser(userData);
+          // console.log(userData)
 
           // Set bio
           setBio(userData.bio || "");
+          setCity(userData.city || "");
+          setStreet(userData.street || "");
+          setPostalCode(userData.postalCode || "");
+          setCountry(userData.country || "");
 
           // Set experience
           setExperience(userData.experience || "1 - 3 years");
@@ -137,6 +146,10 @@ const ArtistForm = () => {
       formData.append('category', selectedReviews.map(review => review.id));
       formData.append('stylesTeach', selectedServices);
       formData.append('bio', bio);
+      formData.append('street', street);
+      formData.append('postalCode',postalCode);
+      formData.append('city', city);
+      formData.append('country', country);
       formData.append('experience', experience);
 
       // Add files only if new files are selected
@@ -146,7 +159,7 @@ const ArtistForm = () => {
       if (files.vss) formData.append('vss', files.vss);
 
       const response = await axios.post(
-        `http://localhost:8080/api/v1/auth/update-user/${userId}`,
+        `https://qbc-backend.onrender.com/api/v1/auth/update-user/${userId}`,
         formData,
         {
           headers: {
@@ -252,10 +265,34 @@ const ArtistForm = () => {
               </div>
             </div>
 
+
+            {/* Experience Section */}
+            <div>
+              <label className="mb-2 artist-label-head">
+                3. How many years of experience you have
+              </label>
+              <div className="artist-experience-cards">
+                {[
+                  "Less than 1 year",
+                  "1 - 3 years",
+                  "3- 5 years",
+                  "more than 10 years"
+                ].map((exp) => (
+                  <div
+                    key={exp}
+                    className={`artist-experience-card ${experience === exp ? "active" : ""}`}
+                    onClick={() => setExperience(exp)}
+                  >
+                    {exp}
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Bio Section */}
             <div>
               <label htmlFor="bio" className="mb-2 artist-label-head">
-                3. Tell us about yourself{" "}
+                4. Tell us about yourself{" "}
                 <span className="artist-form-head-span">(in paragraph)</span>
               </label>
               <textarea
@@ -266,6 +303,53 @@ const ArtistForm = () => {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
               />
+            </div>
+            {/* Address Section */}
+            <div>
+              <label htmlFor="address" className="mb-2 artist-label-head">
+                5. Tell us your address{" "}
+                {/* <span className="artist-form-head-span">(in paragraph)</span> */}
+              </label>
+              {/* <input
+                id="street"
+                name="street"
+                type="text"
+                className="w-full artist-form-select"
+                placeholder="street"
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                style={{marginBottom:"5px"}}
+              /> */}
+              {/* <input
+                id="postalCode"
+                name="postalCode"
+                type="text"
+                className="w-full artist-form-select"
+                placeholder="postal code"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+                style={{marginBottom:"5px"}}
+              /> */}
+              <input
+                id="city"
+                name="city"
+                type="text"
+                className="w-full artist-form-select"
+                placeholder="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                style={{marginBottom:"5px"}}
+              />
+              {/* <input
+                id="country"
+                name="country"
+                type="text"
+                className="w-full artist-form-select"
+                placeholder="country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                style={{marginBottom:"5px"}}
+              /> */}
             </div>
 
             {/* File Upload Sections */}
@@ -322,7 +406,7 @@ const ArtistForm = () => {
             <div>
               <label htmlFor="vss" className="mb-2 artist-label-head">
                 7. Upload your Vulnerable Sector Screening (VSS){" "}
-                <span className="artist-form-head-span">(in pdf)</span>
+                <span className="artist-form-head-span">(in pdf, optional)</span>
               </label>
               {user?.vss && <p className="text-sm text-gray-500 mb-2">Current VSS uploaded</p>}
               <input
@@ -335,7 +419,7 @@ const ArtistForm = () => {
               />
             </div>
 
-            {/* Experience Section */}
+            {/* Experience Section
             <div>
               <label className="mb-2 artist-label-head">
                 8. How many years of experience you have
@@ -356,7 +440,7 @@ const ArtistForm = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {error && <div className="text-red-500 mt-4">{error}</div>}
 

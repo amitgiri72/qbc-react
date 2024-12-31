@@ -38,7 +38,7 @@ const ConfirmedJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/job/bookings?hasBookings=true');
+        const response = await axios.get('https://qbc-backend.onrender.com/api/v1/job/bookings?hasBookings=true');
         setJobs(response.data.jobs);
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -52,7 +52,7 @@ const ConfirmedJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/job/bookings?hasBookings=false');
+        const response = await axios.get('https://qbc-backend.onrender.com/api/v1/job/bookings?hasBookings=false');
         setRequestJobs(response.data.jobs);
       } catch (error) {
         console.error("Error fetching jobs:", error);

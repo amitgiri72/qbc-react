@@ -41,7 +41,7 @@ const BookingRequest = () => {
     const handleGetJob = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8080/api/v1/job/job-detail/${jobId}`
+            `https://qbc-backend.onrender.com/api/v1/job/job-detail/${jobId}`
           );
           if (response) {
             setJobOffer(response.data.job);

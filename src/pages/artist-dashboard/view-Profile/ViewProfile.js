@@ -15,7 +15,7 @@ const ViewProfile = () => {
   const fetchUserDetails = async (userId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/auth/user/${userId}`
+        `https://qbc-backend.onrender.com/api/v1/auth/user/${userId}`
       );
       if (response) {
         setUser(response.data.user);
@@ -35,7 +35,7 @@ const ViewProfile = () => {
   const fetchCategoryDetails = async (categoryIds) => {
     try {
       const categoryPromises = categoryIds.map(id => 
-        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
+        axios.get(`https://qbc-backend.onrender.com/api/v1/service/single-service/${id.trim()}`)
       );
       
       const categoryResponses = await Promise.all(categoryPromises);
@@ -89,7 +89,7 @@ const ViewProfile = () => {
           </div>
           <div className="artist-viewp-profileinfo">
             <h1>{user?.name}</h1>
-            <p>{user?.role}</p>
+            {/* <p>{user?.role}</p> */}
             
             <p>Experience: {user?.experience}</p>
             <p>Styles: {user?.stylesTeach?.join(', ')}</p>
@@ -111,7 +111,7 @@ const ViewProfile = () => {
                 alt={category.name} 
               />
               <h4>{category.name}</h4>
-              <p>${category.rate}/hr</p>
+              {/* <p>${category.rate}/hr</p> */}
             </div>
           ))}
         </div>

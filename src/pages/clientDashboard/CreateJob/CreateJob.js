@@ -36,7 +36,7 @@ const CreateJob = () => {
         setMessage('');
 
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/job/create-job', formData);
+            const response = await axios.post('https://qbc-backend.onrender.com/api/v1/job/create-job', formData);
             setLoading(false);
 
             if (response.data.success) {

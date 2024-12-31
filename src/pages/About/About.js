@@ -38,7 +38,7 @@ function About() {
               <h5>For Studios :</h5>
 
               <li><img src='images/star.png' /><span>Versatile Roster</span></li>
-              <li><img src='images/star.png' /><span>Professional</span></li>
+              <li><img src='images/star.png' /><span>Professionals</span></li>
               <li><img src='images/star.png' /><span>Reference & Background Check</span></li>
             </div>
             <div className="right-l2"></div>

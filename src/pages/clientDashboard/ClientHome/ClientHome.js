@@ -39,7 +39,7 @@ const ClientHome = () => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/v1/job/bookings?hasBookings=true');
+                const response = await axios.get('https://qbc-backend.onrender.com/api/v1/job/bookings?hasBookings=true');
                 setJobs(response.data.jobs); // Assuming the API response contains an array of jobs
             } catch (error) {
                 console.error("Error fetching jobs:", error);
@@ -55,7 +55,7 @@ const ClientHome = () => {
     const fetchUserDetails = async (userId) => {
         try {
           const response = await axios.get(
-            `http://localhost:8080/api/v1/auth/user/${userId}`
+            `https://qbc-backend.onrender.com/api/v1/auth/user/${userId}`
           );
           if(response){
             setUser(response.data.user);

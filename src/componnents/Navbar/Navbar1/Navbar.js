@@ -8,6 +8,7 @@ import axios from 'axios';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [role, setRole] = useState("");
+  const [profileStatus, setProfileStatus] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
 
@@ -15,12 +16,14 @@ const Navbar = () => {
   useEffect(() => {
     const checkRole = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/auth/check-role', {
+            const response = await axios.get('https://qbc-backend.onrender.com/api/v1/auth/check-role', {
                 withCredentials: true
             });
             if (response) {
                 console.log(response.data.userRole);
                 setRole(response.data.userRole);
+                console.log(response.data.userStatus);
+                setProfileStatus(response.data.userStatus);
             }
         } catch (error) {
             console.log(error);
@@ -33,7 +36,7 @@ const Navbar = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/auth/verify-token', {
+        const response = await axios.get('https://qbc-backend.onrender.com/api/v1/auth/verify-token', {
           withCredentials: true
         });
         if(response){
@@ -73,14 +76,21 @@ const Navbar = () => {
     }
   
     return isAuthenticated ? (
-      dashboardLink ? (
+      profileStatus === 'Confirmed' ? (
         <Link
           to={dashboardLink}
           className="text-sm font-medium px-6 py-2 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-[30px]"
         >
           Dashboard
         </Link>
-      ) : null // Don't show anything if role is neither 'Artist' nor 'Client'
+      ) : profileStatus === 'Pending' ? (
+        <Link
+          to="/artist-form"
+          className="text-sm font-medium px-6 py-2 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-[30px]"
+        >
+          Complete Your Profile
+        </Link>
+      ) : null
     ) : (
       <>
         <Link
@@ -109,14 +119,21 @@ const Navbar = () => {
     }
   
     return isAuthenticated ? (
-      dashboardLink ? (
+      profileStatus === 'Confirmed' ? (
         <Link
           to={dashboardLink}
           className="block w-full px-3 py-2 text-sm font-medium border-1 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md"
         >
           Dashboard
         </Link>
-      ) : null // Don't show anything if role is neither 'Artist' nor 'Client'
+      ) : profileStatus === 'Pending' ? (
+        <Link
+          to="/artist-form"
+          className="block w-full px-3 py-2 text-sm font-medium border-1 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 rounded-md"
+        >
+          Complete Your Profile
+        </Link>
+      ) : null
     ) : (
       <>
         <Link

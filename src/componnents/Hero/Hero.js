@@ -89,7 +89,8 @@ const HeroSection = () => {
 
         </div>
       </div>
-      <AnimatedStats />
+      {/* live bar */}
+      {/* <AnimatedStats /> */}
     </div>
   );
 };

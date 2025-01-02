@@ -9,6 +9,9 @@ module.exports = {
         red: {
           600: '#AA1A12', // Replace with your exact red color
         },
+        //   white: {
+        //   DEFAULT: '#FFFFFF',
+        // },
        
       },
       fontFamily: {

@@ -49,7 +49,7 @@ const Home = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/service/get-service');
+        const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service');
         if (data.success) {
           setServices(data.service);
         }
@@ -65,7 +65,7 @@ const Home = () => {
   useEffect(() => {
     const fetchTestimonial = async () => {
       try {
-        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/testimonial/get-testimonial');
+        const { data } = await axios.get('http://localhost:8080/api/v1/testimonial/get-testimonial');
         if (data.success) {
           setTestimonials(data.testimonial);
         }
@@ -83,7 +83,7 @@ const Home = () => {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/artist/get-all'); // Adjust API endpoint as needed
+        const { data } = await axios.get('http://localhost:8080/api/v1/artist/get-all'); // Adjust API endpoint as needed
         if (data.success) {
           const artistsWithCategories = await Promise.all(
             data.artists.map(async (artist) => {
@@ -109,7 +109,7 @@ const Home = () => {
   const fetchCategoryDetails = async (categoryIds) => {
     try {
       const categoryPromises = categoryIds.map((id) =>
-        axios.get(`https://qbc-backend.onrender.com/api/v1/service/single-service/${id.trim()}`)
+        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
       );
       const categoryResponses = await Promise.all(categoryPromises);
       return categoryResponses.map((response) => response.data.service); // Return category data

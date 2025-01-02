@@ -19,7 +19,7 @@ const ArtistProfile = () => {
   const fetchUserDetails = async (userId) => {
     try {
       const response = await axios.get(
-        `https://qbc-backend.onrender.com/api/v1/auth/user/${userId}`
+        `http://localhost:8080/api/v1/auth/user/${userId}`
       );
       if (response) {
         setUser(response.data.user);
@@ -42,7 +42,7 @@ const ArtistProfile = () => {
   const fetchCategoryDetails = async (categoryIds) => {
     try {
       const categoryPromises = categoryIds.map((id) =>
-        axios.get(`https://qbc-backend.onrender.com/api/v1/service/single-service/${id.trim()}`)
+        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
       );
       const categoryResponses = await Promise.all(categoryPromises);
       const categoryData = categoryResponses.map((response) => response.data.service);

@@ -10,7 +10,7 @@ const Services = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/service/get-service'); // Adjust API endpoint as needed
+        const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service'); // Adjust API endpoint as needed
         if (data.success) {
           setServices(data.service);
         }

@@ -38,7 +38,7 @@ const ArtistDJobs = () => {
     const fetchJobs = async () => {
       try {
         const response = await axios.get(
-          "https://qbc-backend.onrender.com/api/v1/job/get-jobs"
+          "http://localhost:8080/api/v1/job/get-jobs"
         );
         setJobs(response.data.jobs); // Assuming the API response contains an array of jobs
       } catch (error) {
@@ -53,7 +53,7 @@ const ArtistDJobs = () => {
     const fetchJobs = async () => {
       try {
         const response = await axios.get(
-          `https://qbc-backend.onrender.com/api/v1/job/user/${userId}/confirmed`
+          `http://localhost:8080/api/v1/job/user/${userId}/confirmed`
         );
         setConfirmedJobs(response.data.jobs); // Assuming the API response contains an array of jobs
         console.log("con", response.data.jobs);

@@ -21,7 +21,7 @@ const Login = () => {
 
         try {
             const response = await axios.post(
-                'https://qbc-backend.onrender.com/api/v1/auth/login', 
+                'http://localhost:8080/api/v1/auth/login', 
                 { email, password },
                 { withCredentials: true } // Ensures cookies are sent with the request
             );

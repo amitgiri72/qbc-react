@@ -30,7 +30,7 @@ const ArtistForm = () => {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const { data } = await axios.get('https://qbc-backend.onrender.com/api/v1/service/get-service');
+        const { data } = await axios.get('http://localhost:8080/api/v1/service/get-service');
         if (data.success) {
           setCategory(data.service);
         }
@@ -46,7 +46,7 @@ const ArtistForm = () => {
   const fetchCategoryDetails = async (categoryIds) => {
     try {
       const categoryPromises = categoryIds.map(id =>
-        axios.get(`https://qbc-backend.onrender.com/api/v1/service/single-service/${id.trim()}`)
+        axios.get(`http://localhost:8080/api/v1/service/single-service/${id.trim()}`)
       );
       const categoryResponses = await Promise.all(categoryPromises);
       const categoryData = categoryResponses.map(response => response.data.service);
@@ -68,7 +68,7 @@ const ArtistForm = () => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `https://qbc-backend.onrender.com/api/v1/auth/user/${userId}`
+          `http://localhost:8080/api/v1/auth/user/${userId}`
         );
         if (response.data.user) {
           const userData = response.data.user;
@@ -159,7 +159,7 @@ const ArtistForm = () => {
       if (files.vss) formData.append('vss', files.vss);
 
       const response = await axios.post(
-        `https://qbc-backend.onrender.com/api/v1/auth/update-user/${userId}`,
+        `http://localhost:8080/api/v1/auth/update-user/${userId}`,
         formData,
         {
           headers: {

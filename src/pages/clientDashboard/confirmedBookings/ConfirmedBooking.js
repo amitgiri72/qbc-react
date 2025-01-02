@@ -44,7 +44,7 @@ const ConfirmedBooking = () => {
   const fetchUserDetails = async (userId) => {
     try {
       const response = await axios.get(
-        `https://qbc-backend.onrender.com/api/v1/auth/user/${userId}`
+        `http://localhost:8080/api/v1/auth/user/${userId}`
       );
       return response.data.user;
     } catch (error) {
@@ -56,7 +56,7 @@ const ConfirmedBooking = () => {
   const handleGetJob = async () => {
     try {
       const response = await axios.get(
-        `https://qbc-backend.onrender.com/api/v1/job/job-detail/${jobId}`
+        `http://localhost:8080/api/v1/job/job-detail/${jobId}`
       );
       if (response) {
         setJobOffer(response.data.job);

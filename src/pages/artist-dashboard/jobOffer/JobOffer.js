@@ -45,7 +45,7 @@ const JobOffer = () => {
   const handleGetJob = async () => {
     try {
       const response = await axios.get(
-        `https://qbc-backend.onrender.com/api/v1/job/job-detail/${jobId}`
+        `http://localhost:8080/api/v1/job/job-detail/${jobId}`
       );
       if (response) {
         setJobOffer(response.data.job);
@@ -58,7 +58,7 @@ const JobOffer = () => {
   const handleConfirmJob = async () => {
     try {
       const response = await axios.post(
-        `https://qbc-backend.onrender.com/api/v1/job/users/${jobId}`,{userId,notes}
+        `http://localhost:8080/api/v1/job/users/${jobId}`,{userId,notes}
       );
       if (response) {
         toast.success("Job applied successfully")

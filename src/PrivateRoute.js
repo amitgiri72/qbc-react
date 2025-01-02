@@ -12,7 +12,7 @@ const PrivateRoute = () => {
     React.useEffect(() => {
         const verifyToken = async () => {
             try {
-             const res =   await axios.get('https://qbc-backend.onrender.com/api/v1/auth/artist-verify', { withCredentials: true });
+             const res =   await axios.get('http://localhost:8080/api/v1/auth/artist-verify', { withCredentials: true });
                if(res){ setIsAuthenticated(true);
                     console.log(res.data.user._id)
                     // Cookies.set('userId', res.data.user._id, { expires: 7 });

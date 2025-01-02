@@ -17,7 +17,7 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const naviagteSignup = () =>{
+  const naviagteSignup = () => {
     navigate('/register')
   }
   return (
@@ -43,6 +43,7 @@ const HeroSection = () => {
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">Hire</h2>
                 <span className="text-2xl sm:text-3xl lg:text-4xl text-gray-100">Skilled Artists</span>
               </div>
+              <p className='text-white'>Empowering Dance Professionals since 2010, Connected with 400+ Studios and Generated $1.5 Million+ for Artists.</p>
             </div>
 
             {/* CTA Buttons */}
@@ -55,13 +56,13 @@ const HeroSection = () => {
               </button>
             </div>
           </div>
-          
+
 
           {/* Right image section - Removed blur border for laptop */}
           <div className="absolute inset-0 lg:relative lg:inset-auto">
             {/* Mobile blur overlay - only shows on mobile */}
             <div className="absolute inset-0 bg-red-600/60 backdrop-blur-sm z-10 lg:hidden"></div>
-            
+
             {/* Image container */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                           lg:relative lg:inset-auto lg:transform-none lg:h-full 
@@ -72,9 +73,8 @@ const HeroSection = () => {
                 {images.map((src, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ${
-                      currentSlide === index ? 'opacity-100' : 'opacity-0'
-                    }`}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${currentSlide === index ? 'opacity-100' : 'opacity-0'
+                      }`}
                   >
                     <img
                       src={src}
@@ -86,10 +86,10 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-         
+
         </div>
       </div>
-      <AnimatedStats/>
+      <AnimatedStats />
     </div>
   );
 };
